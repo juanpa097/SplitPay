@@ -3,6 +3,17 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+<<<<<<< HEAD
+=======
+core
+nbproject/*
+nbproject/project.properties
+nbproject/project.xml
+
+dist/
+build/
+
+>>>>>>> 8a047a09318d40a4d92d9e312a44e80ed5799d8d
 # Package Files #
 *.jar
 *.war
@@ -10,26 +21,3 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-
-
-#ant specific
-dist/
-build/
-
-#netbeans specific
-core
-nbproject/*
-nbproject/project.properties
-nbproject/project.xml
-
-#java specific
-*.class
-
-#general swap/backup files
-*.so
-*.log
-*.out
-*~
-*.swp
-*.DS_Store
-*.lock
