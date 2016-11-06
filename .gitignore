@@ -2,9 +2,6 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-
-<<<<<<< HEAD
-=======
 core
 nbproject/*
 nbproject/project.properties
@@ -12,8 +9,6 @@ nbproject/project.xml
 
 dist/
 build/
-
->>>>>>> 8a047a09318d40a4d92d9e312a44e80ed5799d8d
 # Package Files #
 *.jar
 *.war
