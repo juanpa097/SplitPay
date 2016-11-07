@@ -1,0 +1,13 @@
+-- User Insert
+INSERT INTO "IS102621"."USER" (NAME, EMAIL, MOBILE) VALUES ('JUAN', 'juanpenaloza@gmail.com', '123456789');
+INSERT INTO "IS102621"."USER" (NAME, EMAIL, MOBILE) VALUES ('Ivan', 'ivan@gmail.com', '493860361');
+INSERT INTO "IS102621"."USER" (NAME, EMAIL, MOBILE) VALUES ('Danna', 'danna@gmail.com', '4830484763');
+INSERT INTO "IS102621"."USER" (NAME, EMAIL, MOBILE) VALUES ('Mariana', 'mariana@gmail.com', '75093850384');
+INSERT INTO "IS102621"."USER" (NAME, EMAIL, MOBILE) VALUES ('Ricardo', 'ricardo@gmail.com', '46245764565');
+INSERT INTO "IS102621"."USER" (NAME, EMAIL, MOBILE) VALUES ('Pilar', 'pilar@gmail.com', '54234253');
+INSERT INTO "IS102621"."USER" (NAME, EMAIL, MOBILE) VALUES ('Andres', 'andre@gmail.com', '5234532452');
+INSERT INTO "IS102621"."USER" (NAME, EMAIL, MOBILE) VALUES ('Luisa', 'luisa@gmail.com', '53245235234');
+
+-- Group Insert
+INSERT INTO "IS102621"."GROUP" (NAME, LEADER_EMAIL) VALUES ('golf', 'juanpenaloza@gmail.com');
+INSERT INTO "IS102621"."GROUP" (NAME, LEADER_EMAIL) VALUES ('party', 'ivan@gmail.com');
