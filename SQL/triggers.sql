@@ -13,13 +13,13 @@ END;
 
 -- Sequence Group TRIGGER
 
-create or replace TRIGGER TRG_PK_GROUP
-BEFORE INSERT ON "GROUP"
+create or replace TRIGGER TRG_PK_GRUPO
+BEFORE INSERT ON GRUPO
 FOR EACH ROW
   BEGIN
     IF inserting THEN
       IF :NEW."ID" IS NULL THEN
-        SELECT group_seq.NEXTVAL INTO :NEW."ID" FROM dual;
+        SELECT grupo_seq.NEXTVAL INTO :NEW."ID" FROM dual;
       END IF;
     END IF;
   END;
@@ -32,7 +32,7 @@ FOR EACH ROW
   BEGIN
     IF inserting THEN
       IF :NEW."ID_TRANSACTION" IS NULL THEN
-        SELECT group_seq.NEXTVAL INTO :NEW."ID_TRANSACTION" FROM dual;
+        SELECT TX_SEQ.NEXTVAL INTO :NEW."ID_TRANSACTION" FROM dual;
       END IF;
     END IF;
   END;
