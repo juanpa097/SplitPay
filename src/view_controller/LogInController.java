@@ -37,11 +37,11 @@ public class LogInController implements ActionListener {
         {
             System.err.println("Existe");
             currentView.setVisible(false);
-            MainView.getCreateGroupView().setVisible(true); // Usado para testear la view de createGroupView
+            MainView.getCreateGroupView().setVisible(true);// Usado para testear la view de createGroupView
             MainView.setActualUser( found );
         }
         else
-            new JOptionPane().showMessageDialog(currentView, 
+            new JOptionPane().showMessageDialog(currentView,
                     "El usuario no existe, por favor registrese primero.", 
                     "Usuario No Existe", 
                     JOptionPane.ERROR_MESSAGE);
