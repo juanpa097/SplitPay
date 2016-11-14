@@ -67,7 +67,7 @@ public class CreateGroupController implements ActionListener
                 
                  // Hasta aqui se crea el grupo
                  
-                int group_id = controller_grupo.findGrupo();
+                //int group_id = controller_grupo.findGrupo();
                 UserXGroupJpaController controller_users = new UserXGroupJpaController( EntityFactorySingleton.getEMF() );
                 for( Usuario user : currentView.getUser_list() )
                 {
@@ -79,7 +79,7 @@ public class CreateGroupController implements ActionListener
                     pk.setUserEmail(user.getEmail());
                     pk.setGroupId(nuevo_grupo.getId());
                     nuevo.setUserXGroupPK(pk);
-                    usuarios_insert.add(nuevo);
+                    //usuarios_insert.add(nuevo);
                 }
             }catch (Exception ex)
             {
