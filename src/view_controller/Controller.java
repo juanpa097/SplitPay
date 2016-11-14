@@ -3,17 +3,21 @@ package view_controller;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import vista.LogInView;
+import vista.MainView;
 
 public class Controller {
     
-    private LogInController logInContrl;
+    private MainView mainView;
     private RegisterController registerContrl;
+    private LogInController logInContrl;
+    
+    private LogInView logInView;
     
     public static EntityManagerFactory emf = null;
     
-    public Controller (LogInView currentView) {
-        logInContrl = new LogInController(currentView);
-        registerContrl = new  RegisterController(currentView);
+    public Controller (LogInView logInView) {
+        logInContrl = new LogInController(logInView);
+        registerContrl = new  RegisterController(MainView.getRegisterView());
     }
     
     public LogInController getLogInController() {

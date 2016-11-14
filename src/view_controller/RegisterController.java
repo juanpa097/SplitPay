@@ -3,22 +3,23 @@ package view_controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import vista.LogInView;
+import vista.MainView;
 import vista.RegisterView;
 
 public class RegisterController implements ActionListener{
     
-    private LogInView mainMenu;
     private RegisterView registerView;
 
-    public RegisterController (LogInView current) {
-        mainMenu = current;
-        registerView = current.getRegisterView();
+    public RegisterController (RegisterView current) {
+        registerView = current;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.err.println(registerView.getEmailField().getText());
         checkFieldsComplete();
+        registerView.setVisible(false);
+        MainView.getLogInView().setVisible(true);
     }
     
     private void checkFieldsComplete() {

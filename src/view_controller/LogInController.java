@@ -3,20 +3,24 @@ package view_controller;
 import entities_controllers.UsuarioJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import vista.LogInView;
-import vista.RegisterView;
+import vista.MainView;
 
 public class LogInController implements ActionListener {
     private LogInView currentView;
-
-    public LogInController (JFrame current) {
-        currentView = (LogInView) current;
+    
+    public LogInController (LogInView logInView) {
+        currentView = logInView;
+        if (currentView == null)
+            System.err.println("Construct is NULL");
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (currentView == null)
+            System.err.println("Current is NULL");
+        
         if (e.getSource().equals(currentView.getSignInBtn()))
             signInAction();
         if (e.getSource().equals(currentView.getRegisterBtn()))
@@ -26,7 +30,7 @@ public class LogInController implements ActionListener {
     
     private void registerAction() {
         currentView.setVisible(false);
-        currentView.getRegisterView().setVisible(true);
+        MainView.getRegisterView().setVisible(true);
     }
     
     private void signInAction () {

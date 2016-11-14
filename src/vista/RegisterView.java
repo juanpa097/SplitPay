@@ -7,7 +7,8 @@ package vista;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import view_controller.Controller;
+import javax.swing.event.AncestorListener;
+import view_controller.RegisterController;
 
 /**
  *
@@ -20,6 +21,8 @@ public class RegisterView extends javax.swing.JFrame {
      */
     public RegisterView() {
         initComponents();
+        registerCtrl = new RegisterController(this);
+        doneBtn.addActionListener(registerCtrl);
     }
 
     /**
@@ -169,7 +172,7 @@ public class RegisterView extends javax.swing.JFrame {
 
     /* Nosotros **/
     
-    
+    private RegisterController registerCtrl;
     
     public JButton getDoneBtn() {
         return doneBtn;
