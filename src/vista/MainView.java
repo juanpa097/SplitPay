@@ -75,13 +75,14 @@ public class MainView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    
     private static LogInView logInView;
+    private static CreateGroupView createGroupView;
     private static RegisterView registerView;
     private static EntityFactorySingleton contro;
     private void initializeView () {
         logInView = new LogInView();
         registerView = new RegisterView();
+        createGroupView = new CreateGroupView();
     }
 
     public static LogInView getLogInView() {
@@ -90,6 +91,9 @@ public class MainView extends javax.swing.JFrame {
 
     public static RegisterView getRegisterView() {
         return registerView;
+    }
+    public static CreateGroupView getCreateGroupView() {
+        return createGroupView;
     }
     
     
