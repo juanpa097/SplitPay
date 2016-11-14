@@ -2,13 +2,13 @@ package vista;
 
 import view_controller.CreateGroupController;
 
-public class CreateGroupView extends javax.swing.JFrame {
+public class CreateGroupView extends javax.swing.JFrame
+{
 
-    /**
-     * Creates new form CreateGroupView
-     */
-    public CreateGroupView() {
+    public CreateGroupView()
+    {
         initComponents();
+        membersScrollPane.setViewport(null);
         controlador = new CreateGroupController(this);
     }
 
@@ -157,10 +157,6 @@ public class CreateGroupView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_fondo;
     private javax.swing.JButton addGroupBtn;
@@ -172,7 +168,6 @@ public class CreateGroupView extends javax.swing.JFrame {
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JLabel tituloLabel;
     // End of variables declaration//GEN-END:variables
-    
     private CreateGroupController controlador;
     
 }

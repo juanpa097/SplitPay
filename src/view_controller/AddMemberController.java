@@ -2,17 +2,17 @@ package view_controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vista.CreateGroupView;
+import vista.AddMemberView;
 
-public class CreateGroupController implements ActionListener
+public class AddMemberController implements ActionListener
 {
-    private CreateGroupView currentView;
+    private AddMemberView currentView;
     
-    public CreateGroupController( CreateGroupView otherView )
+    public AddMemberController( AddMemberView vista )
     {
-        this.currentView = otherView;
+        currentView = vista;
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e)
     {
