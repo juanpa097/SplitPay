@@ -5,11 +5,10 @@ import entities.UserXGroup;
 import entities.UserXGroupPK;
 import entities.Usuario;
 import entities_controllers.GrupoJpaController;
+import entities_controllers.UserXGroupJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -62,9 +61,14 @@ public class CreateGroupController implements ActionListener
             {
                 GrupoJpaController controller_grupo = new GrupoJpaController( EntityFactorySingleton.getEMF() );
                 Grupo nuevo_grupo = new Grupo();
-                List < UserXGroup > usuarios_insert = new ArrayList<>();
-                nuevo_grupo.setLeaderEmail( MainView.getActual_user() );
                 nuevo_grupo.setName( nombre_grupo );
+                nuevo_grupo.setLeaderEmail( MainView.getActual_user() );
+                controller_grupo.create(nuevo_grupo);
+                
+                 // Hasta aqui se crea el grupo
+                 
+                int group_id = controller_grupo.findGrupo();
+                UserXGroupJpaController controller_users = new UserXGroupJpaController( EntityFactorySingleton.getEMF() );
                 for( Usuario user : currentView.getUser_list() )
                 {
                     UserXGroup nuevo = new UserXGroup();
@@ -77,18 +81,6 @@ public class CreateGroupController implements ActionListener
                     nuevo.setUserXGroupPK(pk);
                     usuarios_insert.add(nuevo);
                 }
-                UserXGroup nuevo = new UserXGroup();
-                UserXGroupPK pk = new UserXGroupPK();
-                nuevo.setBalance( new BigDecimal(0.0) );
-                nuevo.setGrupo(nuevo_grupo);
-                nuevo.setUsuario(MainView.getActual_user());
-                pk.setUserEmail(MainView.getActual_user().getEmail());
-                pk.setGroupId(nuevo_grupo.getId());
-                nuevo.setUserXGroupPK(pk);
-                usuarios_insert.add(nuevo);
-                nuevo_grupo.setUserXGroupList(usuarios_insert);
-                controller_grupo.create(nuevo_grupo);
-                System.out.println("Grupo creado");
             }catch (Exception ex)
             {
                 Logger.getLogger(CreateGroupController.class.getName()).log(Level.SEVERE, null, ex);
