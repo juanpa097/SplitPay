@@ -35,7 +35,7 @@ public class LogInController implements ActionListener {
     
     private void signInAction () {
         String email = currentView.getEmailText();
-        UsuarioJpaController contro = new UsuarioJpaController( Controller.getEMF() );
+        UsuarioJpaController contro = new UsuarioJpaController( EntityFactorySingleton.getEMF() );
         if( contro.findUsuario( email ) != null )
             System.err.println("Existe");
         else

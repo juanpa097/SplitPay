@@ -5,7 +5,7 @@
  */
 package vista;
 
-import view_controller.Controller;
+import view_controller.EntityFactorySingleton;
 
 /**
  *
@@ -20,7 +20,6 @@ public class MainView extends javax.swing.JFrame {
         initComponents();
         initializeView();
         logInView.setVisible(true);
-        contro = new Controller(logInView);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -79,7 +78,7 @@ public class MainView extends javax.swing.JFrame {
     
     private static LogInView logInView;
     private static RegisterView registerView;
-    private static Controller contro;
+    private static EntityFactorySingleton contro;
     private void initializeView () {
         logInView = new LogInView();
         registerView = new RegisterView();
