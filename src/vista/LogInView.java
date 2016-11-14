@@ -19,9 +19,10 @@ public class LogInView extends javax.swing.JFrame {
      */
     public LogInView() {
         initComponents();
-        viewContrl = new Controller(new View());
-        //signInBtn.addActionListener(viewContrl.getLogInController());
-        // registerBtn.addActionListener(l);
+        initializeViews();
+        viewContrl = new Controller(this);
+        signInBtn.addActionListener(viewContrl.getLogInController());
+        registerBtn.addActionListener(viewContrl.getLogInController());
     }
 
     @SuppressWarnings("unchecked")
@@ -54,11 +55,10 @@ public class LogInView extends javax.swing.JFrame {
         logInLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logInLabel.setText("Log In");
 
-        emailField.setText("jTextField1");
-
         emailLabel.setText("Email:");
 
         registerLabel.setForeground(new java.awt.Color(51, 51, 255));
+        registerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         registerLabel.setText("¿No tienes Cuenta? Haz Click En Registrarse.");
 
         registerBtn.setText("¡Registrarse!");
@@ -77,9 +77,7 @@ public class LogInView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(logInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(logInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 251, Short.MAX_VALUE)
                         .addComponent(emailLabel)
@@ -88,13 +86,14 @@ public class LogInView extends javax.swing.JFrame {
                             .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(77, 77, 77)
-                                .addComponent(signInBtn))
-                            .addComponent(registerLabel))
-                        .addGap(244, 244, 244))))
+                                .addComponent(signInBtn)))
+                        .addGap(238, 238, 238))
+                    .addComponent(registerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(registerBtn)
-                .addGap(351, 351, 351))
+                .addGap(348, 348, 348))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +108,9 @@ public class LogInView extends javax.swing.JFrame {
                 .addComponent(signInBtn)
                 .addGap(61, 61, 61)
                 .addComponent(registerLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(registerBtn)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,6 +162,7 @@ public class LogInView extends javax.swing.JFrame {
             }
         });
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
@@ -175,9 +175,11 @@ public class LogInView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     // Nosotros
-    
     private Controller viewContrl;
     private RegisterView registerView;
+    private void initializeViews() {
+        registerView = new RegisterView();
+    }
     
     public String getEmailText() {
         return emailField.getText();
@@ -193,5 +195,6 @@ public class LogInView extends javax.swing.JFrame {
     
     public JButton getRegisterBtn () {
         return registerBtn;
-    }
+    }    
+    
 }

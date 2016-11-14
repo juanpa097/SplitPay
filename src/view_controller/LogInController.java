@@ -17,17 +17,16 @@ public class LogInController implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.equals(currentView.getSignInBtn()))
+        if (e.getSource().equals(currentView.getSignInBtn()))
             signInAction();
-        if (e.equals(currentView.getRegisterBtn()))
+        if (e.getSource().equals(currentView.getRegisterBtn()))
             registerAction();
         
     }
     
     private void registerAction() {
         currentView.setVisible(false);
-        RegisterView regView = new RegisterView();
-        regView.setVisible(true);
+        currentView.getRegisterView().setVisible(true);
     }
     
     private void signInAction () {

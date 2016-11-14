@@ -2,22 +2,26 @@ package view_controller;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import vista.View;
+import vista.LogInView;
 
 public class Controller {
     
     private LogInController logInContrl;
     private RegisterController registerContrl;
-    public static EntityManagerFactory emf = null;
-
     
-    public Controller (View currentView) {
-        logInContrl = new LogInController(currentView.getLogInView());
-        registerContrl = new  RegisterController(currentView.getRegisterView());
+    public static EntityManagerFactory emf = null;
+    
+    public Controller (LogInView currentView) {
+        logInContrl = new LogInController(currentView);
+        registerContrl = new  RegisterController(currentView);
     }
     
     public LogInController getLogInController() {
         return logInContrl;
+    }
+
+    public RegisterController getRegisterContrl() {
+        return registerContrl;
     }
     
     public static EntityManagerFactory getEMF() {
@@ -25,4 +29,7 @@ public class Controller {
             emf = Persistence.createEntityManagerFactory("SplitPayPU");
         return emf;
     }
+    
+ 
+    
 }
