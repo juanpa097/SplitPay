@@ -12,15 +12,10 @@ public class LogInController implements ActionListener {
     
     public LogInController (LogInView logInView) {
         currentView = logInView;
-        if (currentView == null)
-            System.err.println("Construct is NULL");
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (currentView == null)
-            System.err.println("Current is NULL");
-        
+    public void actionPerformed(ActionEvent e) {        
         if (e.getSource().equals(currentView.getSignInBtn()))
             signInAction();
         if (e.getSource().equals(currentView.getRegisterBtn()))
