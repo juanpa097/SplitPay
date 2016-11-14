@@ -40,6 +40,12 @@ public class LogInController implements ActionListener {
                     JOptionPane.ERROR_MESSAGE);
     }
     
+    // Temporal function for testing the posting a bill view
+    private void postBillAction () {
+        currentView.setVisible(false);
+        MainView.getRegisterView().setVisible(true);
+    }
+    
     
     
 }
