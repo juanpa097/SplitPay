@@ -9,6 +9,8 @@ public class AddMemberView extends javax.swing.JFrame
     {
         initComponents();
         controlador = new AddMemberController(this);
+        addBtn.addActionListener(controlador);
+        cancelBtn.addActionListener(controlador);
     }
     
     /**

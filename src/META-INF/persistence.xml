@@ -13,9 +13,9 @@
     <class>entities.Usuario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDISOR"/>
-      <property name="javax.persistence.jdbc.user" value="is102621"/>
+      <property name="javax.persistence.jdbc.user" value="is102618"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-      <property name="javax.persistence.jdbc.password" value="jQPXnBbKRt"/>
+      <property name="javax.persistence.jdbc.password" value="KXXIaNjI0B"/>
     </properties>
   </persistence-unit>
 </persistence>

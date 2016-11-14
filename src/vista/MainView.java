@@ -5,6 +5,7 @@
  */
 package vista;
 
+import entities.Usuario;
 import view_controller.EntityFactorySingleton;
 
 /**
@@ -80,6 +81,8 @@ public class MainView extends javax.swing.JFrame {
     private static RegisterView registerView;
     private static EntityFactorySingleton contro;
     private static AddMemberView addMemberView;
+    private static Usuario actual_user;
+    
     private void initializeView () {
         logInView = new LogInView();
         registerView = new RegisterView();
@@ -90,7 +93,11 @@ public class MainView extends javax.swing.JFrame {
     public static LogInView getLogInView() {
         return logInView;
     }
-
+    
+    public static Usuario getActual_user() {
+        return actual_user;
+    }
+    
     public static RegisterView getRegisterView() {
         return registerView;
     }
@@ -100,5 +107,10 @@ public class MainView extends javax.swing.JFrame {
     
     public static AddMemberView getAddMemberView() {
         return addMemberView;
+    }
+    
+    public static void setActualUser( Usuario nuevo_user )
+    {
+        actual_user = nuevo_user;
     }
 }

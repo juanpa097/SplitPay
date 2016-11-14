@@ -25,34 +25,51 @@ public class AddMemberController implements ActionListener
         return false;
     }
     
+    private void addBtnAction()
+    {
+        String email = currentView.getEmail_textField().getText();
+        UsuarioJpaController user = new UsuarioJpaController( EntityFactorySingleton.getEMF() );
+        Usuario found = user.findUsuario(email);
+        if( found == null )
+            JOptionPane.showMessageDialog( currentView, 
+            "El usuario no existe.", 
+            "Usuario No Existe", 
+            JOptionPane.ERROR_MESSAGE );
+        else
+        {
+            if( found.equals( MainView.getActual_user() ) )
+                JOptionPane.showMessageDialog( currentView, 
+                "Ya haces parte de este grupo.", 
+                "Usuario lider", 
+                JOptionPane.ERROR_MESSAGE );
+            else if( !inList( MainView.getCreateGroupView().getUser_list() , found ) )
+            {
+                MainView.getCreateGroupView().getUser_list().add(found);
+                currentView.setVisible(false);
+                MainView.getCreateGroupView().desplegarDatos();
+                MainView.getCreateGroupView().setVisible(true);
+            }
+            else
+                JOptionPane.showMessageDialog( currentView, 
+                "El usuario ya se encuentra en este grupo.", 
+                "Usuario Ya Existente", 
+                JOptionPane.ERROR_MESSAGE );
+        }
+    }
+    
+    private void cancelBtnAction()
+    {
+        currentView.setVisible(false);
+        MainView.getCreateGroupView().setVisible(true);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e)
     {
         if( e.getSource().equals( currentView.getAddBtn() ) )
-        {
-            String email = currentView.getEmail_textField().getText();
-            UsuarioJpaController user = new UsuarioJpaController( EntityFactorySingleton.getEMF() );
-            Usuario found = user.findUsuario(email);
-            if( found == null )
-                JOptionPane.showMessageDialog( currentView, 
-                "El usuario no existe, por favor registrese primero.", 
-                "Usuario No Existe", 
-                JOptionPane.ERROR_MESSAGE );
-            else
-            {
-                if( !inList( MainView.getCreateGroupView().getUser_list() , found ) )
-                {
-                    currentView.setVisible(false);
-                    MainView.getCreateGroupView().desplegarDatos();
-                    MainView.getCreateGroupView().setVisible(true);
-                }
-            }
-        }
+            addBtnAction();
         else if( e.getSource().equals( currentView.getCancelBtn() ) )
-        {
-            currentView.setVisible(false);
-            MainView.getCreateGroupView().setVisible(true);
-        }
+            cancelBtnAction();
     }
     
 }

@@ -15,10 +15,11 @@ public class CreateGroupView extends javax.swing.JFrame
     {
         initComponents();
         users = new ArrayList< Usuario > ();
-        membersScrollPane.setViewport( null );
+        desplegarDatos();
         controlador = new CreateGroupController( this );
         addMemberBtn.addActionListener( controlador );
         addGroupBtn.addActionListener( controlador );
+        deleteMemberBtn.addActionListener( controlador );
     }
     
     public void desplegarDatos()
@@ -54,6 +55,7 @@ public class CreateGroupView extends javax.swing.JFrame
         membersTable = new javax.swing.JTable();
         addGroupBtn = new javax.swing.JButton();
         addMemberBtn = new javax.swing.JButton();
+        deleteMemberBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,6 +115,8 @@ public class CreateGroupView extends javax.swing.JFrame
             }
         });
 
+        deleteMemberBtn.setText("Delete member");
+
         javax.swing.GroupLayout Panel_fondoLayout = new javax.swing.GroupLayout(Panel_fondo);
         Panel_fondo.setLayout(Panel_fondoLayout);
         Panel_fondoLayout.setHorizontalGroup(
@@ -126,10 +130,13 @@ public class CreateGroupView extends javax.swing.JFrame
                                 .addComponent(nombreLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(281, 281, 281)
-                                .addComponent(addMemberBtn))
+                                .addGap(374, 374, 374))
                             .addComponent(membersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Panel_fondoLayout.createSequentialGroup()
+                                .addComponent(addMemberBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deleteMemberBtn))))
                     .addGroup(Panel_fondoLayout.createSequentialGroup()
                         .addGap(375, 375, 375)
                         .addComponent(addGroupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -138,23 +145,21 @@ public class CreateGroupView extends javax.swing.JFrame
         Panel_fondoLayout.setVerticalGroup(
             Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_fondoLayout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_fondoLayout.createSequentialGroup()
-                        .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombreLabel)
-                            .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_fondoLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(addMemberBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreLabel)
+                    .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addMemberBtn)
+                    .addComponent(deleteMemberBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(membersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addGroupBtn)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,6 +188,7 @@ public class CreateGroupView extends javax.swing.JFrame
     private javax.swing.JPanel Panel_fondo;
     private javax.swing.JButton addGroupBtn;
     private javax.swing.JButton addMemberBtn;
+    private javax.swing.JButton deleteMemberBtn;
     private javax.swing.JTextField groupNameField;
     private javax.swing.JPanel membersPanel;
     private javax.swing.JScrollPane membersScrollPane;
@@ -198,11 +204,26 @@ public class CreateGroupView extends javax.swing.JFrame
         return users;
     }
 
+    public javax.swing.JTable getMembersTable()
+    {
+        return membersTable;
+    }
+    
+    public javax.swing.JTextField getGroupNameField()
+    {
+        return groupNameField;
+    }
+    
     public JButton getAddGroupBtn()
     {
         return addGroupBtn;
     }
 
+    public JButton getDeleteMemberBtn()
+    {
+        return deleteMemberBtn;
+    }
+    
     public JButton getAddMemberBtn()
     {
         return addMemberBtn;
