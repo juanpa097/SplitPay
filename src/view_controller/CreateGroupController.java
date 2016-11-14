@@ -3,6 +3,7 @@ package view_controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import vista.CreateGroupView;
+import vista.MainView;
 
 public class CreateGroupController implements ActionListener
 {
@@ -16,7 +17,16 @@ public class CreateGroupController implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if( e.getSource().equals( currentView.getAddMemberBtn()) )
+        {
+            MainView.getAddMemberView().getEmail_textField().setText("");
+            MainView.getCreateGroupView().setVisible(false);
+            MainView.getAddMemberView().setVisible(true);
+        }
+        else if( e.getSource().equals( currentView.getAddGroupBtn() ) )
+        {
+            
+        }
     }
     
 }

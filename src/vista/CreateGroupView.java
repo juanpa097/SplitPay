@@ -1,15 +1,39 @@
 package vista;
 
+import entities.Usuario;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 import view_controller.CreateGroupController;
 
 public class CreateGroupView extends javax.swing.JFrame
 {
-
+    // Aun falta configurar antes de entrar a esta view para reiniciar los datos de la lista
+    
     public CreateGroupView()
     {
         initComponents();
-        membersScrollPane.setViewport(null);
-        controlador = new CreateGroupController(this);
+        users = new ArrayList< Usuario > ();
+        membersScrollPane.setViewport( null );
+        controlador = new CreateGroupController( this );
+        addMemberBtn.addActionListener( controlador );
+        addGroupBtn.addActionListener( controlador );
+    }
+    
+    public void desplegarDatos()
+    {
+        String[] columnas = {"Name" , "Email" , "Mobile"};
+        Object[][] data = new Object[users.size()][columnas.length];
+        for( int i = 0 ; i < users.size() ; ++i )
+        {
+            data[i][0] = users.get(i).getName();
+            data[i][1] = users.get(i).getEmail();
+            data[i][2] = users.get(i).getMobile();
+        }
+        DefaultTableModel model = new DefaultTableModel( data , columnas );
+        membersTable.setModel( model );
+        membersScrollPane.setViewportView( membersTable );
     }
 
     /**
@@ -29,7 +53,7 @@ public class CreateGroupView extends javax.swing.JFrame
         membersScrollPane = new javax.swing.JScrollPane();
         membersTable = new javax.swing.JTable();
         addGroupBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        addMemberBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,10 +106,10 @@ public class CreateGroupView extends javax.swing.JFrame
             }
         });
 
-        jButton1.setText("Add Member");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addMemberBtn.setText("Add Member");
+        addMemberBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addMemberBtnActionPerformed(evt);
             }
         });
 
@@ -94,30 +118,27 @@ public class CreateGroupView extends javax.swing.JFrame
         Panel_fondoLayout.setHorizontalGroup(
             Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_fondoLayout.createSequentialGroup()
-                .addGap(339, 339, 339)
-                .addComponent(nombreLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(48, 48, 48))
-            .addGroup(Panel_fondoLayout.createSequentialGroup()
                 .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_fondoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Panel_fondoLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
-                        .addComponent(membersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(Panel_fondoLayout.createSequentialGroup()
+                                .addComponent(nombreLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(281, 281, 281)
+                                .addComponent(addMemberBtn))
+                            .addComponent(membersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(Panel_fondoLayout.createSequentialGroup()
-                        .addGap(333, 333, 333)
+                        .addGap(375, 375, 375)
                         .addComponent(addGroupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         Panel_fondoLayout.setVerticalGroup(
             Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_fondoLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,14 +146,15 @@ public class CreateGroupView extends javax.swing.JFrame
                         .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nombreLabel)
                             .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_fondoLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(3, 3, 3)))
+                        .addGap(20, 20, 20)
+                        .addComponent(addMemberBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(membersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addGroupBtn)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,15 +175,15 @@ public class CreateGroupView extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_addGroupBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addMemberBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_fondo;
     private javax.swing.JButton addGroupBtn;
+    private javax.swing.JButton addMemberBtn;
     private javax.swing.JTextField groupNameField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel membersPanel;
     private javax.swing.JScrollPane membersScrollPane;
     private javax.swing.JTable membersTable;
@@ -169,5 +191,23 @@ public class CreateGroupView extends javax.swing.JFrame
     private javax.swing.JLabel tituloLabel;
     // End of variables declaration//GEN-END:variables
     private CreateGroupController controlador;
+    private List < Usuario > users;
+    
+    public List < Usuario > getUser_list()
+    {
+        return users;
+    }
+
+    public JButton getAddGroupBtn()
+    {
+        return addGroupBtn;
+    }
+
+    public JButton getAddMemberBtn()
+    {
+        return addMemberBtn;
+    }
+    
+    
     
 }

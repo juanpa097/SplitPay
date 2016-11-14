@@ -38,27 +38,24 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
-                  <Component id="nombreLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="groupNameField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tituloLabel" min="-2" pref="781" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          <Component id="membersPanel" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="nombreLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="groupNameField" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
+                                  <Component id="addMemberBtn" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="membersPanel" min="-2" max="-2" attributes="0"/>
+                              <Component id="tituloLabel" alignment="1" min="-2" pref="781" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="333" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="375" max="-2" attributes="0"/>
                           <Component id="addGroupBtn" min="-2" pref="114" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -69,7 +66,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
                   <Component id="tituloLabel" min="-2" pref="43" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -78,17 +75,18 @@
                               <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="groupNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="addMemberBtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="membersPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="addGroupBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -176,12 +174,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addGroupBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="addMemberBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add Member"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMemberBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
