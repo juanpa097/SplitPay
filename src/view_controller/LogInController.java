@@ -1,5 +1,6 @@
 package view_controller;
 
+import entities.Usuario;
 import entities_controllers.UsuarioJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,8 +32,14 @@ public class LogInController implements ActionListener {
     private void signInAction () {
         String email = currentView.getEmailText();
         UsuarioJpaController contro = new UsuarioJpaController( EntityFactorySingleton.getEMF() );
-        if( contro.findUsuario( email ) != null )
+        Usuario found = contro.findUsuario( email );
+        if( found != null )
+        {
             System.err.println("Existe");
+            currentView.setVisible(false);
+            MainView.getCreateGroupView().setVisible(true); // Usado para testear la view de createGroupView
+            MainView.setActualUser( found );
+        }
         else
             new JOptionPane().showMessageDialog(currentView, 
                     "El usuario no existe, por favor registrese primero.", 

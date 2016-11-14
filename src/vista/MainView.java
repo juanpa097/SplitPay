@@ -5,6 +5,7 @@
  */
 package vista;
 
+import entities.Usuario;
 import view_controller.EntityFactorySingleton;
 
 /**
@@ -75,22 +76,41 @@ public class MainView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    
     private static LogInView logInView;
+    private static CreateGroupView createGroupView;
     private static RegisterView registerView;
     private static EntityFactorySingleton contro;
+    private static AddMemberView addMemberView;
+    private static Usuario actual_user;
+    
     private void initializeView () {
         logInView = new LogInView();
         registerView = new RegisterView();
+        createGroupView = new CreateGroupView();
+        addMemberView = new AddMemberView();
     }
 
     public static LogInView getLogInView() {
         return logInView;
     }
-
+    
+    public static Usuario getActual_user() {
+        return actual_user;
+    }
+    
     public static RegisterView getRegisterView() {
         return registerView;
     }
+    public static CreateGroupView getCreateGroupView() {
+        return createGroupView;
+    }
     
+    public static AddMemberView getAddMemberView() {
+        return addMemberView;
+    }
     
+    public static void setActualUser( Usuario nuevo_user )
+    {
+        actual_user = nuevo_user;
+    }
 }
