@@ -5,7 +5,7 @@
  */
 package vista;
 
-import oracle.net.aso.l;
+import javax.swing.JButton;
 import view_controller.Controller;
 
 /**
@@ -19,8 +19,9 @@ public class LogInView extends javax.swing.JFrame {
      */
     public LogInView() {
         initComponents();
-        viewContrl = new Controller(this);
-        signInBtn.addActionListener(viewContrl.getLogInController());
+        viewContrl = new Controller(new View());
+        //signInBtn.addActionListener(viewContrl.getLogInController());
+        // registerBtn.addActionListener(l);
     }
 
     @SuppressWarnings("unchecked")
@@ -176,8 +177,21 @@ public class LogInView extends javax.swing.JFrame {
     // Nosotros
     
     private Controller viewContrl;
+    private RegisterView registerView;
     
     public String getEmailText() {
         return emailField.getText();
+    }
+    
+    public RegisterView getRegisterView() {
+        return registerView;
+    } 
+    
+    public JButton getSignInBtn () {
+        return signInBtn;
+    }
+    
+    public JButton getRegisterBtn () {
+        return registerBtn;
     }
 }
