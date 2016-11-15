@@ -236,4 +236,10 @@ public class GrupoJpaController implements Serializable {
         }
     }
     
+    public Object[][] getGroupMembers (BigDecimal groupID) {
+        EntityManager em = getEntityManager();
+        //Query usersInGroup = em.createNativeQuery(sqlString)
+        return null;
+    }
+    
 }

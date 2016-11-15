@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view_controller;
 
-/**
- *
- * @author Mono
- */
-public class PostBillController {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import vista.PostBillView;
+
+public class PostBillController implements ActionListener {
+    private PostBillView currentView;
     
+    public PostBillController (PostBillView view) {
+        currentView = view;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
 }
