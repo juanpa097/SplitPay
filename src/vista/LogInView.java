@@ -22,6 +22,7 @@ public class LogInView extends javax.swing.JFrame {
         logInCtrl = new LogInController(this);
         signInBtn.addActionListener(logInCtrl);
         registerBtn.addActionListener(logInCtrl);
+        postBillBtn.addActionListener(logInCtrl);
     }
 
     @SuppressWarnings("unchecked")
@@ -178,5 +179,11 @@ public class LogInView extends javax.swing.JFrame {
     public JButton getRegisterBtn () {
         return registerBtn;
     }    
+
+    public JButton getPostBillBtn() {
+        return postBillBtn;
+    }
+    
+    
     
 }

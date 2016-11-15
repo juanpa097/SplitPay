@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -238,8 +239,22 @@ public class GrupoJpaController implements Serializable {
     
     public Object[][] getGroupMembers (BigDecimal groupID) {
         EntityManager em = getEntityManager();
-        //Query usersInGroup = em.createNativeQuery(sqlString)
-        return null;
+        //USUARIO.MOBILE
+        Query usersNameInGroup = em.createNativeQuery("SELECT USUARIO.NAME AS NAME FROM GRUPO NATURAL JOIN USER_X_GROUP JOIN USUARIO ON  USER_X_GROUP.USER_EMAIL = USUARIO.EMAIL WHERE USER_X_GROUP.GROUP_ID = GRUPO.ID AND GRUPO.ID = ?1 ORDER BY USUARIO.NAME");
+        usersNameInGroup.setParameter(1, groupID);
+        List<String> usersName = usersNameInGroup.getResultList();
+        
+        Query usersEmailInGroup = em.createNativeQuery("SELECT USER_X_GROUP.USER_EMAIL FROM GRUPO NATURAL JOIN USER_X_GROUP JOIN USUARIO ON  USER_X_GROUP.USER_EMAIL = USUARIO.EMAIL WHERE USER_X_GROUP.GROUP_ID = GRUPO.ID AND GRUPO.ID = ?1 ORDER BY USUARIO.NAME");
+        usersEmailInGroup.setParameter(1, groupID);
+        List<String> usersEmail = usersEmailInGroup.getResultList();
+        
+        Object[][] usersGroupTable = new Object[usersName.size()][2];
+        for (int i = 0; i < usersName.size(); ++i) {
+            usersGroupTable[i][0] = usersName.get(i);
+            usersGroupTable[i][1] = usersEmail.get(i);
+        }
+
+        return usersGroupTable;
     }
     
 }

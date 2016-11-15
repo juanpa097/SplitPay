@@ -22,6 +22,8 @@ public class LogInController implements ActionListener {
             signInAction();
         if (e.getSource().equals(currentView.getRegisterBtn()))
             registerAction();
+        if (e.getSource().equals(currentView.getPostBillBtn()))
+            postBillAction();
         
     }
     
@@ -52,7 +54,7 @@ public class LogInController implements ActionListener {
     private void postBillAction () {
         currentView.setVisible(false);
         MainView.getPostingBillView().setVisible(true);
-        MainView.getPostingBillView().setCurrentGroupUD(new BigDecimal("22"));
+        MainView.getPostingBillView().setCurrentGroupID(new BigDecimal("22"));
     }
     
     

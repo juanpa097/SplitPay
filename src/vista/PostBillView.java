@@ -10,7 +10,9 @@ public class PostBillView extends javax.swing.JFrame {
     
     public PostBillView() {
         initComponents();
-        //postBillCtrl = new PostBillController()
+        postBillCtrl = new PostBillController(this);
+        postBillCtrl.loadTable();
+        confirmBtn.addActionListener(postBillCtrl);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -133,15 +135,16 @@ public class PostBillView extends javax.swing.JFrame {
     private javax.swing.JLabel tittleLabel;
     // End of variables declaration//GEN-END:variables
     
-    private BigDecimal currentGroupUD;
+    private BigDecimal currentGroupID;
     private PostBillController postBillCtrl;
 
-    public BigDecimal getCurrentGroupUD() {
-        return currentGroupUD;
+    public BigDecimal getCurrentGroupID() {
+        return currentGroupID;
     }
 
-    public void setCurrentGroupUD(BigDecimal currentGroupUD) {
-        this.currentGroupUD = currentGroupUD;
+    public void setCurrentGroupID(BigDecimal currentGroupUD) {
+        this.currentGroupID = currentGroupUD;
+        postBillCtrl.loadTable();
     }
 
     public JTextField getAmountField() {
@@ -154,6 +157,10 @@ public class PostBillView extends javax.swing.JFrame {
 
     public JTable getGroupMembersTable() {
         return groupMembersTable;
+    }
+
+    public PostBillController getPostBillCtrl() {
+        return postBillCtrl;
     }
 
 }

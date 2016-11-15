@@ -90,6 +90,7 @@ public class MainView extends javax.swing.JFrame {
         registerView = new RegisterView();
         createGroupView = new CreateGroupView();
         addMemberView = new AddMemberView();
+        postingBillView = new PostBillView();
     }
 
     public static LogInView getLogInView() {
