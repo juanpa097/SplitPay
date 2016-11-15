@@ -4,6 +4,7 @@ import entities.Usuario;
 import entities_controllers.UsuarioJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 import vista.LogInView;
 import vista.MainView;
@@ -50,7 +51,8 @@ public class LogInController implements ActionListener {
     // Temporal function for testing the posting a bill view
     private void postBillAction () {
         currentView.setVisible(false);
-        MainView.getRegisterView().setVisible(true);
+        MainView.getPostingBillView().setVisible(true);
+        MainView.getPostingBillView().setCurrentGroupUD(new BigDecimal("22"));
     }
     
     

@@ -79,8 +79,10 @@ public class MainView extends javax.swing.JFrame {
     private static LogInView logInView;
     private static CreateGroupView createGroupView;
     private static RegisterView registerView;
-    private static EntityFactorySingleton contro;
     private static AddMemberView addMemberView;
+    private static PostBillView postingBillView;
+    
+    private static EntityFactorySingleton contro;
     private static Usuario actual_user;
     
     private void initializeView () {
@@ -107,6 +109,10 @@ public class MainView extends javax.swing.JFrame {
     
     public static AddMemberView getAddMemberView() {
         return addMemberView;
+    }
+
+    public static PostBillView getPostingBillView() {
+        return postingBillView;
     }
     
     public static void setActualUser( Usuario nuevo_user )
