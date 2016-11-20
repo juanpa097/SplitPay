@@ -20,10 +20,16 @@ public class LogInController implements ActionListener {
     public void actionPerformed(ActionEvent e) {        
         if (e.getSource().equals(currentView.getSignInBtn()))
             signInAction();
+        if (e.getSource().equals(currentView.getEmailField()))
+            signInAction();
         if (e.getSource().equals(currentView.getRegisterBtn()))
             registerAction();
+        // TEST
         if (e.getSource().equals(currentView.getPostBillBtn()))
             postBillAction();
+        if (e.getSource().equals(currentView.getTransactionButton()))
+            transacionAction();
+            
         
     }
     
@@ -57,6 +63,11 @@ public class LogInController implements ActionListener {
         MainView.getPostingBillView().setCurrentGroupID(new BigDecimal("22"));
     }
     
+    private void transacionAction () {
+        currentView.setVisible(false);
+        MainView.getTransactionView().setVisible(true);
+        
+    }
     
     
 }

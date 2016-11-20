@@ -15,16 +15,19 @@ import entities.Deuda;
 import entities.DeudaPK;
 import entities.Usuario;
 import entities.Transaction;
-import entities.UserXGroup;
-import entities.UserXGroupPK;
 import entities_controllers.exceptions.IllegalOrphanException;
 import entities_controllers.exceptions.NonexistentEntityException;
 import entities_controllers.exceptions.PreexistingEntityException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import view_controller.EntityFactorySingleton;
 
 /**
@@ -280,13 +283,50 @@ public class DeudaJpaController implements Serializable {
         EntityManager em = getEntityManager();
         UsuarioJpaController usrCtrl = new UsuarioJpaController(EntityFactorySingleton.getEMF());
         for (int i = 0; i < emails.size(); ++i) {
-            Usuario tempUsr = usrCtrl.findUsuario(emails.get(i));
-            DeudaPK pk = new DeudaPK(emails.get(i), bill.getId());
-            Deuda newDeuda = new Deuda(pk, amoutToEncreaseToEach);
-            newDeuda.setBill(bill);
-            newDeuda.setUsuario(tempUsr);
-            create(newDeuda);
+            if (!emails.get(i).equals(bill.getUserXGroup().getUsuario().getEmail())) {
+                Usuario tempUsr = usrCtrl.findUsuario(emails.get(i));
+                DeudaPK pk = new DeudaPK(emails.get(i), bill.getId());
+                Deuda newDeuda = new Deuda(pk, amoutToEncreaseToEach);
+                newDeuda.setBill(bill);
+                newDeuda.setUsuario(tempUsr);
+                create(newDeuda);
+            }
         }
+    }
+    
+    public BigDecimal getSumDeudas (String email) {
+        EntityManager em = getEntityManager();
+        Query sumDeudas = em.createNativeQuery("SELECT SUM(AMOUNT) FROM DEUDA WHERE DEUDOR = ?");
+        sumDeudas.setParameter(1, email);
+        BigDecimal sum = (BigDecimal) sumDeudas.getSingleResult();
+        return sum;
+    }
+    
+    public HashMap getListDeudas (String email) {
+        EntityManager em = getEntityManager();
+        Query listaDeudas = em.createNativeQuery("SELECT DEUDOR, BILL.ID_RESPONSABLE, DEUDA.AMOUNT FROM DEUDA JOIN BILL ON DEUDA.BILL_ID = BILL.ID  WHERE DEUDOR = ?");
+        listaDeudas.setParameter(1, email);
+        List <Object[]> resultList;
+        resultList = listaDeudas.getResultList();
+        HashMap<String, BigDecimal> mapDeudas = new HashMap<>();
+        for (Object[] objects : resultList) {
+            String deudor = (String) objects[0];
+            String acreedor = (String) objects[1];
+            BigDecimal amount = (BigDecimal) objects[2];
+            BigDecimal currentVal = mapDeudas.get(acreedor);
+            mapDeudas.merge(acreedor, amount, BigDecimal::add);
+        }
+        return mapDeudas;
+    }
+    
+    public void deleteAllDebts (String email) {
+        EntityManager em = getEntityManager();
+        Query listaDeudas = em.createNativeQuery("DELETE (SELECT DEUDOR, BILL.ID_RESPONSABLE, DEUDA.AMOUNT FROM DEUDA JOIN BILL ON DEUDA.BILL_ID = BILL.ID  WHERE DEUDOR = ?)");
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        listaDeudas.setParameter(1, email);
+        listaDeudas.executeUpdate();
+        et.commit();
     }
     
 }

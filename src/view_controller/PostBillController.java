@@ -23,9 +23,14 @@ public class PostBillController implements ActionListener {
 
     private PostBillView currentView;
     private File imageFile;
+    private BigDecimal idGroup;
+    private String currentUser;
+    
     
     public PostBillController(PostBillView view) {
         currentView = view;
+        idGroup = new BigDecimal(22);
+        currentUser = "juanpenaloza@gmail.com";
     }
 
     @Override
@@ -47,11 +52,11 @@ public class PostBillController implements ActionListener {
     private void increaseUsersBalance() {
         UserXGroupJpaController usrXgrpCntrl = new UserXGroupJpaController(EntityFactorySingleton.getEMF());
         Double amount = new Double(currentView.getAmountField().getText());
-        Double div = new Double(countPayers());
+        usrXgrpCntrl.addUserBalance(currentUser, idGroup, new BigDecimal(amount * -1));
+        Double div = countPayers();
         amount = amount / div;
         Math.round(amount);
         BigDecimal toAdd = new BigDecimal(amount);
-        System.out.println("Amount For Each: " + amount);
         try {
             usrXgrpCntrl.encreaseUsersBalance(payersEmails(), currentView.getCurrentGroupID(), toAdd);
         } catch (Exception ex) {
@@ -109,7 +114,9 @@ public class PostBillController implements ActionListener {
         for (int i = 0; i < currentView.getGroupMembersTable().getRowCount(); ++i) {
             Boolean checked = Boolean.valueOf(currentView.getGroupMembersTable().getValueAt(i, 0).toString());
             if (checked) {
-                emails.add(currentView.getGroupMembersTable().getValueAt(i, 2).toString());
+                String email = currentView.getGroupMembersTable().getValueAt(i, 2).toString();
+                //if (!email.equals(currentUser))
+                    emails.add(email);
             }
         }
         return emails;
@@ -157,10 +164,10 @@ public class PostBillController implements ActionListener {
         BillJpaController billCtrl = new BillJpaController(EntityFactorySingleton.getEMF());
         BigDecimal amoun = new BigDecimal(currentView.getAmountField().getText());
         String tittle = currentView.getTittleBillField().getText();
-        String responsable = "juanpenaloza@gmail.com";
+        String responsable = currentUser;
         //BigDecimal groupID = currentView.getCurrentGroupID();
         // TODO: Estos valores no son correctors! 
-        BigDecimal groupID = new BigDecimal(21);
+        BigDecimal groupID = idGroup;
 
         try {
             billCtrl.insertBill( amoun, tittle, responsable, groupID);
