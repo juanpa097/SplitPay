@@ -115,8 +115,7 @@ public class PostBillController implements ActionListener {
             Boolean checked = Boolean.valueOf(currentView.getGroupMembersTable().getValueAt(i, 0).toString());
             if (checked) {
                 String email = currentView.getGroupMembersTable().getValueAt(i, 2).toString();
-                //if (!email.equals(currentUser))
-                    emails.add(email);
+                emails.add(email);
             }
         }
         return emails;

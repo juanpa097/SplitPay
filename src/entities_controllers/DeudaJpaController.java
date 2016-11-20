@@ -25,6 +25,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.util.Pair;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -329,4 +332,41 @@ public class DeudaJpaController implements Serializable {
         et.commit();
     }
     
+    public List <Object[]> deptsToUser (String deudor, String acreedor) {
+        EntityManager em = getEntityManager();
+        Query listaDeudas = em.createNativeQuery("SELECT DEUDOR, BILL.ID_RESPONSABLE, DEUDA.AMOUNT,BILL_ID FROM DEUDA JOIN BILL ON DEUDA.BILL_ID = BILL.ID  WHERE BILL.ID_RESPONSABLE = ? AND DEUDOR = ?");
+        listaDeudas.setParameter(1, acreedor);
+        listaDeudas.setParameter(2, deudor);
+        List <Object[]> resultList;
+        resultList = listaDeudas.getResultList();
+        for (Object[] objects : resultList) {
+            String deud = (String) objects[0];
+            String acreed = (String) objects[1];
+            BigDecimal amount = (BigDecimal) objects[2];
+            System.out.println("Deudor: " + deud + " Acreed: " + acreed);
+        }
+        return resultList;
+    }
+    
+    public void updateDebts (ArrayList <Pair <String, BigDecimal> > listDeudas, ArrayList<BigDecimal> idBills, String deudor) {
+        int idIdx = 0;
+        BillJpaController billCrtl = new BillJpaController(EntityFactorySingleton.getEMF());
+        UsuarioJpaController usrCtrl = new UsuarioJpaController(EntityFactorySingleton.getEMF());
+        for (Pair <String, BigDecimal> pair : listDeudas) {
+            DeudaPK pk = new DeudaPK(deudor, idBills.get(idIdx++));            
+            Deuda old = findDeuda(pk);
+            old.setAmount(pair.getValue());
+            
+            try {
+                if (old.getAmount().compareTo(BigDecimal.ZERO) == 0)
+                    destroy(pk);
+                else 
+                    edit(old);
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(DeudaJpaController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(DeudaJpaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
