@@ -8,7 +8,7 @@ public class ManageGroupController implements ActionListener
 {
     private ManageGroupView currentView;
     
-    ManageGroupController( ManageGroupView view )
+    ManageGroupController(ManageGroupView view )
     {
         currentView = view;
     }
