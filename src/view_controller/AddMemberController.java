@@ -4,8 +4,13 @@ import entities.Usuario;
 import entities_controllers.UsuarioJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.ComboBox;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListDataListener;
 import vista.AddMemberView;
 import vista.MainView;
 
@@ -16,6 +21,7 @@ public class AddMemberController implements ActionListener
     public AddMemberController( AddMemberView vista )
     {
         currentView = vista;
+        prepareComboBox();
     }
     
     boolean inList( List < Usuario > users , Usuario user )
@@ -27,7 +33,7 @@ public class AddMemberController implements ActionListener
     
     private void addBtnAction()
     {
-        String email = currentView.getEmail_textField().getText();
+        String email = currentView.getEmailComboBox().getItemAt(currentView.getEmailComboBox().getSelectedIndex());
         UsuarioJpaController user = new UsuarioJpaController( EntityFactorySingleton.getEMF() );
         Usuario found = user.findUsuario(email);
         if( found == null )
@@ -70,6 +76,14 @@ public class AddMemberController implements ActionListener
             addBtnAction();
         else if( e.getSource().equals( currentView.getCancelBtn() ) )
             cancelBtnAction();
+    }
+    
+    private void prepareComboBox() {
+        UsuarioJpaController usrCrtl = new UsuarioJpaController(EntityFactorySingleton.getEMF());
+        List<String> emailList = usrCrtl.getAllUsersEmail();
+        Object[] modelEmail = emailList.toArray();
+        DefaultComboBoxModel comboModel = new DefaultComboBoxModel(modelEmail);
+        currentView.getEmailComboBox().setModel(comboModel);
     }
     
 }

@@ -9,8 +9,8 @@ public class Conexion
 {
   public static Connection getConnection() throws SQLException
   {
-    String username = "is102618";
-    String password = "KXXIaNjI0B";
+    String username = "is102621";
+    String password = "jQPXnBbKRt";
     String thinConn = "jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDISOR";
     DriverManager.registerDriver( new OracleDriver() );
     Connection conn = DriverManager.getConnection( thinConn , username, password );

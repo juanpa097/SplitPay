@@ -46,7 +46,6 @@ public class CreateGroupController implements ActionListener
     
     public void addMemberBtnAction()
     {
-        MainView.getAddMemberView().getEmail_textField().setText("");
         MainView.getCreateGroupView().setVisible(false);
         MainView.getAddMemberView().setVisible(true);
     }
@@ -120,6 +119,9 @@ public class CreateGroupController implements ActionListener
                 Logger.getLogger(CreateGroupController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        currentView.setVisible(false);
+        MainView.getMainMenuView().getMenuCtrl().loadTable(MainView.getActual_user().getEmail());
+        MainView.getMainMenuView().setVisible(true);
     }
     
     @Override

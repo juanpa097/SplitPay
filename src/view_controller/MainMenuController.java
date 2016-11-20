@@ -1,34 +1,56 @@
 package view_controller;
 
-import entities.UserXGroup;
 import entities_controllers.UserXGroupJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.util.List;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import vista.MainMenuView;
 import vista.MainView;
 
-public class MainMenuController implements ActionListener {
+public class MainMenuController extends MouseAdapter implements ActionListener {
+
     private MainMenuView currentView;
     private String currentUser;
-    
-    public MainMenuController (MainMenuView currtent) {
+
+    public MainMenuController(MainMenuView currtent) {
         currentView = currtent;
     }
 
-    
-    
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(MainView.getActual_user().getEmail());
+        createGroupAction();
+    }
+    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2 && e.getSource().equals(currentView.getGroupsTable())) {
+            int row = currentView.getGroupsTable().getSelectedRow();
+            BigDecimal groupId = (BigDecimal) currentView.getGroupsTable().getModel().getValueAt(row, 0);
+            selectGroupAction(groupId);
+        }
+    }
+    
+    
+    
+    private void selectGroupAction(BigDecimal groupId) {
+        // Send To manage Group.
+    }
+    
+    private void createGroupAction() {
+        MainView.getMainMenuView().setVisible(false);
+        MainView.getCreateGroupView().setVisible(true);
     }
 
     public void setCurrentUser(String currentUser) {
         this.currentUser = currentUser;
     }
 
-    public void loadTable (String currentEmail) {
+    public void loadTable(String currentEmail) {
         currentUser = currentEmail;
         UserXGroupJpaController userGrpCtrl = new UserXGroupJpaController(EntityFactorySingleton.getEMF());
         List<Object[]> usersGroups = userGrpCtrl.getUsersGroups(currentEmail);
@@ -39,9 +61,18 @@ public class MainMenuController implements ActionListener {
             tableModel[i][1] = tempArray[1];
             tableModel[i][2] = tempArray[2];
         }
-        String [] columNames = {"ID","Group Name","My Balance"};
-        DefaultTableModel groupsModel = new DefaultTableModel(tableModel, columNames);
+        String[] columNames = {"ID", "Group Name", "My Balance"};
+        DefaultTableModel groupsModel = new DefaultTableModel(tableModel, columNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
         currentView.getGroupsTable().setModel(groupsModel);
+        currentView.getGroupsTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
+
+
+
 }
