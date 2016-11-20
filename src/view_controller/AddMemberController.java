@@ -21,7 +21,7 @@ public class AddMemberController implements ActionListener
     boolean inList( List < Usuario > users , Usuario user )
     {
         for( int i = 0 ; i < users.size() ; ++i )
-            if( users.get(i).equals( user ) )   return true;
+            if(users.get(i).equals( user ) )   return true;
         return false;
     }
     
