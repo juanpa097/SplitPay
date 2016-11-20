@@ -18,8 +18,11 @@ import entities.UserXGroupPK;
 import entities_controllers.exceptions.IllegalOrphanException;
 import entities_controllers.exceptions.NonexistentEntityException;
 import entities_controllers.exceptions.PreexistingEntityException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -269,6 +272,31 @@ public class UserXGroupJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
+        }
+    }
+    
+    public void encreaseUsersBalance(ArrayList<String> emails, BigDecimal groupID, BigDecimal amoutToEncreaseToEach) throws NonexistentEntityException, Exception {
+        EntityManager em = getEntityManager();
+        for (int i = 0; i < emails.size(); ++i) {
+            UserXGroupPK tempPK = new UserXGroupPK(emails.get(i), groupID);
+            UserXGroup found = findUserXGroup(tempPK);
+            found.setBalance(found.getBalance().add(amoutToEncreaseToEach));
+            edit(found);
+        }
+    }
+    
+    public void addUserBalance (String email, BigDecimal groupID, BigDecimal amount) {
+        EntityManager em = getEntityManager();
+        UserXGroupPK tempPK = new UserXGroupPK(email, groupID);
+        UserXGroup found = findUserXGroup(tempPK);
+        if (found == null) System.err.println("NULL");
+        else found.setBalance(found.getBalance().add(amount));
+        try {
+            edit(found);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(UserXGroupJpaController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(UserXGroupJpaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

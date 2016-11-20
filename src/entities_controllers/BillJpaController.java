@@ -16,11 +16,21 @@ import entities.Deuda;
 import entities_controllers.exceptions.IllegalOrphanException;
 import entities_controllers.exceptions.NonexistentEntityException;
 import entities_controllers.exceptions.PreexistingEntityException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import oracle.jdbc.OracleDriver;
 
 /**
  *
@@ -235,5 +245,41 @@ public class BillJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public void insertBill (BigDecimal amount, String tittle, String responsable, BigDecimal idGroup) throws FileNotFoundException, SQLException, IOException {
+        
+        String thinConn = "jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDISOR";
+        String user = "is102621";
+        String passwd = "jQPXnBbKRt";
+                
+        DriverManager.registerDriver(new OracleDriver());
+        
+        Connection conn = DriverManager.getConnection(thinConn, user, passwd);
+        conn.setAutoCommit(true);
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO BILL (IMAGE, AMOUNT, TITTLE, ID_RESPONSABLE, ID_GROUP) VALUES ('null',?,?,?,?)");
+        ps.setBigDecimal(1, amount);
+        ps.setString(2, tittle);
+        ps.setString(3, responsable);
+        ps.setBigDecimal(4, idGroup);
+        
+        ps.executeUpdate();
+        ps.close();
+    }
+    
+    public BigDecimal getLastBillID () throws SQLException {
+        String thinConn = "jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDISOR";
+        String user = "is102621";
+        String passwd = "jQPXnBbKRt";
+        DriverManager.registerDriver(new OracleDriver());
+        Connection conn = DriverManager.getConnection(thinConn, user, passwd);
+        conn.setAutoCommit(true);
+        PreparedStatement ps = conn.prepareStatement("select ID from BILL where ID = ( select max(ID) from BILL )");
+        ResultSet resultSet = ps.executeQuery("select ID from BILL where ID = ( select max(ID) from BILL )");
+        BigDecimal lastId = null; 
+        while (resultSet.next())
+            lastId = resultSet.getBigDecimal("ID");
+        return lastId;
+    }
+    
     
 }

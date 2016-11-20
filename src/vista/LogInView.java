@@ -6,6 +6,7 @@
 package vista;
 
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import view_controller.LogInController;
 
 /**
@@ -22,6 +23,9 @@ public class LogInView extends javax.swing.JFrame {
         logInCtrl = new LogInController(this);
         signInBtn.addActionListener(logInCtrl);
         registerBtn.addActionListener(logInCtrl);
+        emailField.addActionListener(logInCtrl);
+        postBillBtn.addActionListener(logInCtrl);
+        transactionButton.addActionListener(logInCtrl);
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +41,7 @@ public class LogInView extends javax.swing.JFrame {
         registerBtn = new javax.swing.JButton();
         signInBtn = new javax.swing.JButton();
         postBillBtn = new javax.swing.JButton();
+        transactionButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -77,6 +82,13 @@ public class LogInView extends javax.swing.JFrame {
             }
         });
 
+        transactionButton.setText("Transactions");
+        transactionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transactionButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,6 +120,10 @@ public class LogInView extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(postBillBtn)
                                 .addGap(135, 135, 135))))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(255, 255, 255)
+                .addComponent(transactionButton)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +142,9 @@ public class LogInView extends javax.swing.JFrame {
                 .addComponent(registerBtn)
                 .addGap(45, 45, 45)
                 .addComponent(postBillBtn)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(transactionButton)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,6 +169,10 @@ public class LogInView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_postBillBtnActionPerformed
 
+    private void transactionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transactionButtonActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField emailField;
@@ -162,6 +184,7 @@ public class LogInView extends javax.swing.JFrame {
     private javax.swing.JButton registerBtn;
     private javax.swing.JLabel registerLabel;
     private javax.swing.JButton signInBtn;
+    private javax.swing.JButton transactionButton;
     // End of variables declaration//GEN-END:variables
 
     private LogInController logInCtrl;
@@ -170,7 +193,10 @@ public class LogInView extends javax.swing.JFrame {
         return emailField.getText();
     }
 
-    
+    public JTextField getEmailField() {
+        return emailField;
+    }
+
     public JButton getSignInBtn () {
         return signInBtn;
     }
@@ -178,5 +204,13 @@ public class LogInView extends javax.swing.JFrame {
     public JButton getRegisterBtn () {
         return registerBtn;
     }    
+
+    public JButton getPostBillBtn() {
+        return postBillBtn;
+    }
+
+    public JButton getTransactionButton() {
+        return transactionButton;
+    }
     
 }
