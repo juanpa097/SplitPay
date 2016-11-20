@@ -1,6 +1,6 @@
 package view_controller;
 
-import entities.UserXGroup_;
+import entities.UserXGroup;
 import entities_controllers.UserXGroupJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
