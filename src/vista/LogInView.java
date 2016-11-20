@@ -26,6 +26,7 @@ public class LogInView extends javax.swing.JFrame {
         emailField.addActionListener(logInCtrl);
         postBillBtn.addActionListener(logInCtrl);
         transactionButton.addActionListener(logInCtrl);
+        manageGroupBtn.addActionListener(logInCtrl);
     }
 
     @SuppressWarnings("unchecked")
@@ -42,6 +43,7 @@ public class LogInView extends javax.swing.JFrame {
         signInBtn = new javax.swing.JButton();
         postBillBtn = new javax.swing.JButton();
         transactionButton = new javax.swing.JButton();
+        manageGroupBtn = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -89,6 +91,8 @@ public class LogInView extends javax.swing.JFrame {
             }
         });
 
+        manageGroupBtn.setText("Manage Group");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -121,8 +125,13 @@ public class LogInView extends javax.swing.JFrame {
                                 .addComponent(postBillBtn)
                                 .addGap(135, 135, 135))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(transactionButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(transactionButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(manageGroupBtn)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -140,7 +149,9 @@ public class LogInView extends javax.swing.JFrame {
                 .addComponent(registerLabel)
                 .addGap(18, 18, 18)
                 .addComponent(registerBtn)
-                .addGap(45, 45, 45)
+                .addGap(20, 20, 20)
+                .addComponent(manageGroupBtn)
+                .addGap(2, 2, 2)
                 .addComponent(postBillBtn)
                 .addGap(18, 18, 18)
                 .addComponent(transactionButton)
@@ -180,6 +191,7 @@ public class LogInView extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logInLabel;
+    private javax.swing.JButton manageGroupBtn;
     private javax.swing.JButton postBillBtn;
     private javax.swing.JButton registerBtn;
     private javax.swing.JLabel registerLabel;
@@ -211,6 +223,11 @@ public class LogInView extends javax.swing.JFrame {
 
     public JButton getTransactionButton() {
         return transactionButton;
+    }
+    
+    public JButton getManageGroupBtn()
+    {
+        return manageGroupBtn;
     }
     
 }

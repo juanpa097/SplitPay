@@ -83,6 +83,7 @@ public class MainView extends javax.swing.JFrame {
     private static PostBillView postingBillView;
     private static TransactionView transactionView;
     private static MainMenuView mainMenuView;
+    private static ManageGroupView manageGroupView;
     
     private static EntityFactorySingleton contro;
     private static Usuario actual_user;
@@ -95,6 +96,7 @@ public class MainView extends javax.swing.JFrame {
         postingBillView = new PostBillView();
         transactionView = new TransactionView();
         mainMenuView = new MainMenuView();
+        manageGroupView = new ManageGroupView();
     }
 
     public static LogInView getLogInView() {
@@ -126,6 +128,10 @@ public class MainView extends javax.swing.JFrame {
 
     public static MainMenuView getMainMenuView() {
         return mainMenuView;
+    }
+    
+    public static ManageGroupView getManageGroupView() {
+        return manageGroupView;
     }
     
     public static void setActualUser( Usuario nuevo_user ) {

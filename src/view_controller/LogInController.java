@@ -5,6 +5,7 @@ import entities_controllers.UsuarioJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import vista.LogInView;
 import vista.MainView;
@@ -29,8 +30,8 @@ public class LogInController implements ActionListener {
             postBillAction();
         if (e.getSource().equals(currentView.getTransactionButton()))
             transacionAction();
-            
-        
+        if( e.getSource().equals(currentView.getManageGroupBtn()))
+            manageGroupAction();
     }
     
     private void registerAction() {
@@ -69,6 +70,14 @@ public class LogInController implements ActionListener {
         currentView.setVisible(false);
         MainView.getTransactionView().setVisible(true);
         
+    }
+    
+    private void manageGroupAction()
+    {
+        currentView.setVisible(false);
+        MainView.getManageGroupView().setGroupID(new BigDecimal("22"));
+        MainView.getManageGroupView().init();
+        MainView.getManageGroupView().setVisible(true);
     }
     
     

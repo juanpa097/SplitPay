@@ -1,21 +1,80 @@
 package vista;
 
+import entities.Grupo;
+import entities.UserXGroup;
 import entities.Usuario;
+import entities_controllers.Conexion;
+import entities_controllers.UserXGroupJpaController;
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import view_controller.EntityFactorySingleton;
+import view_controller.ManageGroupController;
 
 public class ManageGroupView extends javax.swing.JFrame
 {
     
     private List < Usuario > usuarios_grupo;
     private List < Usuario > usuarios_eliminar;
-
+    private ManageGroupController controller;
+    private BigDecimal groupID;
+    
     public ManageGroupView()
     {
         initComponents();
         usuarios_grupo = new ArrayList < Usuario >();
         usuarios_eliminar = new ArrayList < Usuario >();
+        controller = new ManageGroupController(this);
+        desplegarDatos();
+    }
+    
+    // Only call this method if you already set a groupID
+    public void init()
+    {
+        usuarios_grupo.clear();
+        usuarios_eliminar.clear();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        System.out.println("Hola");
+        try
+        {
+            con = Conexion.getConnection();
+            ps = con.prepareStatement( "SELECT USUARIO.NAME AS NOMBRE , USUARIO.EMAIL AS EMAIL FROM USER_X_GROUP , "
+                    + " USUARIO WHERE USER_X_GROUP.GROUP_ID = ? AND"
+                    + " USER_X_GROUP.USER_EMAIL = USUARIO.EMAIL" );
+            ps.setBigDecimal( 1 , groupID );
+            rs = ps.executeQuery();
+            while( rs.next() )
+            {
+                Usuario user = new Usuario();
+                user.setName(rs.getString("NOMBRE"));
+                user.setEmail(rs.getString("EMAIL"));
+                usuarios_grupo.add( user );
+            }
+        }
+        catch( SQLException ex )
+        {
+            Logger.getLogger( Grupo.class.getName() ).log( Level.SEVERE , null , ex );
+        }
+        finally
+        {
+            if( con != null )
+                try
+                {
+                    con.close();
+                }catch (SQLException ex)
+                {
+                    Logger.getLogger(ManageGroupView.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+        }
         desplegarDatos();
     }
 
@@ -32,6 +91,8 @@ public class ManageGroupView extends javax.swing.JFrame
         manageGroupTitle = new javax.swing.JLabel();
         users_scrollPane = new javax.swing.JScrollPane();
         users_table = new javax.swing.JTable();
+        deleteGroupBtn = new javax.swing.JButton();
+        setGroupLeaderBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,24 +102,37 @@ public class ManageGroupView extends javax.swing.JFrame
 
         users_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Select", "Name", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         users_scrollPane.setViewportView(users_table);
+
+        deleteGroupBtn.setText("Delete selected from group");
+
+        setGroupLeaderBtn.setText("Set as group leader");
+        setGroupLeaderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setGroupLeaderBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -70,7 +144,12 @@ public class ManageGroupView extends javax.swing.JFrame
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(123, 123, 123)
-                .addComponent(users_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(deleteGroupBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(setGroupLeaderBtn))
+                    .addComponent(users_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -80,7 +159,11 @@ public class ManageGroupView extends javax.swing.JFrame
                 .addComponent(manageGroupTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(users_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteGroupBtn)
+                    .addComponent(setGroupLeaderBtn))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,26 +179,39 @@ public class ManageGroupView extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void setGroupLeaderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setGroupLeaderBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_setGroupLeaderBtnActionPerformed
     
     public void desplegarDatos()
     {
-        String[] columnas = {"Delete from group" , "Name" , "Email" };
-        Object[][] data = new Object[usuarios_grupo.size()][columnas.length];
+        String[] columnas = {"Delete from group " , "Name" , "Email" };
+        DefaultTableModel model = (DefaultTableModel)users_table.getModel();
         for( int i = 0 ; i < usuarios_grupo.size() ; ++i )
         {
-            if( usuarios_grupo.get(i).getEmail().equals( MainView.getActual_user().getEmail() ) )   continue;
-            data[i][0] = false;
-            data[i][1] = usuarios_grupo.get(i).getName();
-            data[i][2] = usuarios_grupo.get(i).getEmail();
+            //if( usuarios_grupo.get(i).getEmail().equals( MainView.getActual_user().getEmail() ) )   continue;
+            model.addRow( new Object[] { false , usuarios_grupo.get(i).getName() , usuarios_grupo.get(i).getEmail() } );
         }
-        DefaultTableModel model = new DefaultTableModel( data , columnas );
         users_table.setModel( model );
         users_scrollPane.setViewportView( users_table );
     }
+    
+    public BigDecimal getGroupID()
+    {
+        return groupID;
+    }
+    
+    public void setGroupID( BigDecimal nuevo )
+    {
+        groupID = nuevo;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deleteGroupBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel manageGroupTitle;
+    private javax.swing.JButton setGroupLeaderBtn;
     private javax.swing.JScrollPane users_scrollPane;
     private javax.swing.JTable users_table;
     // End of variables declaration//GEN-END:variables
