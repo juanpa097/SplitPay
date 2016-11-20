@@ -186,7 +186,6 @@ public class ManageGroupView extends javax.swing.JFrame
     
     public void desplegarDatos()
     {
-        String[] columnas = {"Delete from group " , "Name" , "Email" };
         DefaultTableModel model = (DefaultTableModel)users_table.getModel();
         for( int i = 0 ; i < usuarios_grupo.size() ; ++i )
         {
