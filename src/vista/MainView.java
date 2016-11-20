@@ -6,9 +6,6 @@
 package vista;
 
 import entities.Usuario;
-import java.awt.Color;
-import javax.swing.UIManager;
-import javax.swing.plaf.ColorUIResource;
 import view_controller.EntityFactorySingleton;
 
 /**
@@ -85,6 +82,7 @@ public class MainView extends javax.swing.JFrame {
     private static AddMemberView addMemberView;
     private static PostBillView postingBillView;
     private static TransactionView transactionView;
+    private static MainMenuView mainMenuView;
     
     private static EntityFactorySingleton contro;
     private static Usuario actual_user;
@@ -96,7 +94,7 @@ public class MainView extends javax.swing.JFrame {
         addMemberView = new AddMemberView();
         postingBillView = new PostBillView();
         transactionView = new TransactionView();
-        
+        mainMenuView = new MainMenuView();
     }
 
     public static LogInView getLogInView() {
@@ -125,9 +123,12 @@ public class MainView extends javax.swing.JFrame {
     public static TransactionView getTransactionView() {
         return transactionView;
     }
+
+    public static MainMenuView getMainMenuView() {
+        return mainMenuView;
+    }
     
-    public static void setActualUser( Usuario nuevo_user )
-    {
+    public static void setActualUser( Usuario nuevo_user ) {
         actual_user = nuevo_user;
     }
 }

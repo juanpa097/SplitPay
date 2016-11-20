@@ -300,4 +300,19 @@ public class UserXGroupJpaController implements Serializable {
         }
     }
     
+    public List<Object[]> getUsersGroups(String email) {
+        EntityManager em = getEntityManager();
+        Query usersGroups = em.createNativeQuery("SELECT GROUP_ID, GRUPO.NAME, BALANCE FROM USER_X_GROUP JOIN GRUPO ON USER_X_GROUP.GROUP_ID = GRUPO.ID WHERE USER_EMAIL = ?");
+        usersGroups.setParameter(1, email);
+        List<Object[]> groups = usersGroups.getResultList();
+        
+        for (Object[] group : groups) {
+            BigDecimal grpId = (BigDecimal) group[0];
+            String grpName = (String) group[1];
+            BigDecimal grpBalance = (BigDecimal) group[2];
+            System.err.println("ID: " + grpId + " Name: " + grpName + " Balance: " + grpBalance);
+        }
+        
+        return groups;
+    }
 }
