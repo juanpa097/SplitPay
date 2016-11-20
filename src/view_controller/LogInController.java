@@ -48,6 +48,8 @@ public class LogInController implements ActionListener {
             currentView.setVisible(false);
             MainView.getCreateGroupView().setVisible(true);// Usado para testear la view de createGroupView
             MainView.setActualUser( found );
+            MainView.getMainMenuView().getMenuCtrl().loadTable(email);
+            MainView.getMainMenuView().setVisible(true); // Usado para testear la view de createGroupView
         }
         else
             new JOptionPane().showMessageDialog(currentView,
