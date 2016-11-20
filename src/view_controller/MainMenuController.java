@@ -39,8 +39,9 @@ public class MainMenuController implements ActionListener {
             tableModel[i][1] = tempArray[1];
             tableModel[i][2] = tempArray[2];
         }
-        //String [] columNames =
-        DefaultTableModel groupsModel = new DefaultTableModel(tableModel, tableModel);
+        String [] columNames = {"ID","Group Name","My Balance"};
+        DefaultTableModel groupsModel = new DefaultTableModel(tableModel, columNames);
+        currentView.getGroupsTable().setModel(groupsModel);
     }
     
 }
