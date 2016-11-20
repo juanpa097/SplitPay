@@ -267,11 +267,7 @@ public class BillJpaController implements Serializable {
     }
     
     public BigDecimal getLastBillID () throws SQLException {
-        String thinConn = "jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDISOR";
-        String user = "is102621";
-        String passwd = "jQPXnBbKRt";
-        DriverManager.registerDriver(new OracleDriver());
-        Connection conn = DriverManager.getConnection(thinConn, user, passwd);
+        Connection conn = Conexion.getConnection();
         conn.setAutoCommit(true);
         PreparedStatement ps = conn.prepareStatement("select ID from BILL where ID = ( select max(ID) from BILL )");
         ResultSet resultSet = ps.executeQuery("select ID from BILL where ID = ( select max(ID) from BILL )");

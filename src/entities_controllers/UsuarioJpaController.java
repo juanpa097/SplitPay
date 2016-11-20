@@ -314,4 +314,11 @@ public class UsuarioJpaController implements Serializable {
         }
     }
     
+    public List<String> getAllUsersEmail() {
+        EntityManager em = getEntityManager();
+        Query usersEmail = em.createNativeQuery("SELECT EMAIL FROM USUARIO");
+        List<String> emailList = usersEmail.getResultList();
+        return emailList;
+    }
+    
 }

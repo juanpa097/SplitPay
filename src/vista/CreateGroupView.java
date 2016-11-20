@@ -65,8 +65,6 @@ public class CreateGroupView extends javax.swing.JFrame
 
         nombreLabel.setText("Group Name");
 
-        groupNameField.setText("jTextField1");
-
         membersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Members"));
         membersPanel.setToolTipText("");
         membersPanel.setName(""); // NOI18N
@@ -129,8 +127,8 @@ public class CreateGroupView extends javax.swing.JFrame
                             .addGroup(Panel_fondoLayout.createSequentialGroup()
                                 .addComponent(nombreLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(374, 374, 374))
+                                .addComponent(groupNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(262, 262, 262))
                             .addComponent(membersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(Panel_fondoLayout.createSequentialGroup()

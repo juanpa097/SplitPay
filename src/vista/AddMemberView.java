@@ -1,5 +1,6 @@
 package vista;
 
+import javax.swing.JComboBox;
 import view_controller.AddMemberController;
 
 public class AddMemberView extends javax.swing.JFrame
@@ -24,23 +25,23 @@ public class AddMemberView extends javax.swing.JFrame
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        email_textField = new javax.swing.JTextField();
         email_label = new javax.swing.JLabel();
         addBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
+        emailComboBox = new javax.swing.JComboBox<>();
         addMemberLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        email_textField.setText("jTextField1");
-
         email_label.setText("Email:");
 
         addBtn.setText("Add");
 
         cancelBtn.setText("Cancel");
+
+        emailComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -51,23 +52,22 @@ public class AddMemberView extends javax.swing.JFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(email_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(email_textField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(emailComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(83, 83, 83))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(email_label)
-                    .addComponent(email_textField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(emailComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(cancelBtn))
@@ -118,17 +118,12 @@ public class AddMemberView extends javax.swing.JFrame
     private javax.swing.JButton addBtn;
     private javax.swing.JLabel addMemberLabel;
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JComboBox<String> emailComboBox;
     private javax.swing.JLabel email_label;
-    private javax.swing.JTextField email_textField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
     private AddMemberController controlador;
-    
-    public javax.swing.JTextField getEmail_textField()
-    {
-        return email_textField;
-    }
     
     public javax.swing.JButton getCancelBtn()
     {
@@ -139,5 +134,10 @@ public class AddMemberView extends javax.swing.JFrame
     {
         return addBtn;
     }
+
+    public JComboBox<String> getEmailComboBox() {
+        return emailComboBox;
+    }
+    
     
 }
