@@ -1,10 +1,8 @@
 package vista;
 
 import entities.Grupo;
-import entities.UserXGroup;
 import entities.Usuario;
 import entities_controllers.Conexion;
-import entities_controllers.UserXGroupJpaController;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +13,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import view_controller.EntityFactorySingleton;
 import view_controller.ManageGroupController;
 
 public class ManageGroupView extends javax.swing.JFrame
@@ -32,50 +29,15 @@ public class ManageGroupView extends javax.swing.JFrame
         usuarios_grupo = new ArrayList < Usuario >();
         usuarios_eliminar = new ArrayList < Usuario >();
         controller = new ManageGroupController(this);
+        setGroupLeaderBtn.addActionListener(controller);
+        deleteGroupBtn.addActionListener(controller);
         desplegarDatos();
     }
     
     // Only call this method if you already set a groupID
     public void init()
     {
-        usuarios_grupo.clear();
-        usuarios_eliminar.clear();
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        System.out.println("Hola");
-        try
-        {
-            con = Conexion.getConnection();
-            ps = con.prepareStatement( "SELECT USUARIO.NAME AS NOMBRE , USUARIO.EMAIL AS EMAIL FROM USER_X_GROUP , "
-                    + " USUARIO WHERE USER_X_GROUP.GROUP_ID = ? AND"
-                    + " USER_X_GROUP.USER_EMAIL = USUARIO.EMAIL" );
-            ps.setBigDecimal( 1 , groupID );
-            rs = ps.executeQuery();
-            while( rs.next() )
-            {
-                Usuario user = new Usuario();
-                user.setName(rs.getString("NOMBRE"));
-                user.setEmail(rs.getString("EMAIL"));
-                usuarios_grupo.add( user );
-            }
-        }
-        catch( SQLException ex )
-        {
-            Logger.getLogger( Grupo.class.getName() ).log( Level.SEVERE , null , ex );
-        }
-        finally
-        {
-            if( con != null )
-                try
-                {
-                    con.close();
-                }catch (SQLException ex)
-                {
-                    Logger.getLogger(ManageGroupView.class.getName()).log(Level.SEVERE, null, ex);
-                }   
-        }
-        desplegarDatos();
+        controller.init();
     }
 
     /**
@@ -186,7 +148,9 @@ public class ManageGroupView extends javax.swing.JFrame
     
     public void desplegarDatos()
     {
-        DefaultTableModel model = (DefaultTableModel)users_table.getModel();
+        DefaultTableModel model = ( DefaultTableModel )users_table.getModel();
+        for (int i = model.getRowCount() - 1 ; i >= 0 ; --i )
+            model.removeRow(i);
         for( int i = 0 ; i < usuarios_grupo.size() ; ++i )
         {
             //if( usuarios_grupo.get(i).getEmail().equals( MainView.getActual_user().getEmail() ) )   continue;
@@ -204,6 +168,41 @@ public class ManageGroupView extends javax.swing.JFrame
     public void setGroupID( BigDecimal nuevo )
     {
         groupID = nuevo;
+    }
+    
+    public javax.swing.JButton getDeleteGroupBtn()
+    {
+        return deleteGroupBtn;
+    }
+    
+    public void setGroup_list_user( List < Usuario > lista )
+    {
+        usuarios_grupo = lista;
+    }
+    
+    public List < Usuario > getGroup_list_user()
+    {
+        return usuarios_grupo;
+    }
+    
+    public void setDelete_list_user( List < Usuario > lista )
+    {
+        usuarios_eliminar = lista;
+    }
+    
+    public List < Usuario > getDelete_list_user()
+    {
+        return usuarios_eliminar;
+    }
+    
+    public javax.swing.JButton getGroupLeaderBtn()
+    {
+        return setGroupLeaderBtn;
+    }
+    
+    public javax.swing.JTable getUsers_table()
+    {
+        return users_table;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

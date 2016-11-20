@@ -75,7 +75,7 @@ public class LogInController implements ActionListener {
     private void manageGroupAction()
     {
         currentView.setVisible(false);
-        MainView.getManageGroupView().setGroupID(new BigDecimal("22"));
+        MainView.getManageGroupView().setGroupID(new BigDecimal("121"));
         MainView.getManageGroupView().init();
         MainView.getManageGroupView().setVisible(true);
     }

@@ -106,15 +106,23 @@ public class TransactionController implements ItemListener, ActionListener {
     private String[] listEmailsGroup() {
         GrupoJpaController grpCtrl = new GrupoJpaController(EntityFactorySingleton.getEMF());
         Object[][] group = grpCtrl.getGroupMembers(groupID);
-        String[] emailList = new String[group.length - 1];
-        int idx = 0;
-        for (int i = 0; i < group.length; ++i) {
-            String em = (String) group[i][1];
-            if (!em.equals(currentUser)) {
-                emailList[idx++] = em;
+        if( group.length > 0 )
+        {
+            String[] emailList = new String[group.length - 1];
+            int idx = 0;
+            for (int i = 0; i < group.length; ++i) {
+                String em = (String) group[i][1];
+                if (!em.equals(currentUser)) {
+                    emailList[idx++] = em;
+                }
             }
+            return emailList;
         }
-        return emailList;
+        else
+        {
+            String []abc = new String[0];
+            return abc;
+        }
     }
 
     private void seeDebts() {
