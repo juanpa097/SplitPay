@@ -19,7 +19,6 @@ public class ManageGroupView extends javax.swing.JFrame
 {
     
     private List < Usuario > usuarios_grupo;
-    private List < Usuario > usuarios_eliminar;
     private ManageGroupController controller;
     private BigDecimal groupID;
     
@@ -27,9 +26,8 @@ public class ManageGroupView extends javax.swing.JFrame
     {
         initComponents();
         usuarios_grupo = new ArrayList < Usuario >();
-        usuarios_eliminar = new ArrayList < Usuario >();
         controller = new ManageGroupController(this);
-        setGroupLeaderBtn.addActionListener(controller);
+        changeGroupLeaderBtn.addActionListener(controller);
         deleteGroupBtn.addActionListener(controller);
         desplegarDatos();
     }
@@ -54,7 +52,10 @@ public class ManageGroupView extends javax.swing.JFrame
         users_scrollPane = new javax.swing.JScrollPane();
         users_table = new javax.swing.JTable();
         deleteGroupBtn = new javax.swing.JButton();
-        setGroupLeaderBtn = new javax.swing.JButton();
+        changeGroupLeaderBtn = new javax.swing.JButton();
+        groupNameLabel = new javax.swing.JLabel();
+        groupNameTextField = new javax.swing.JTextField();
+        changeGroupName = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,42 +90,65 @@ public class ManageGroupView extends javax.swing.JFrame
 
         deleteGroupBtn.setText("Delete selected from group");
 
-        setGroupLeaderBtn.setText("Set as group leader");
-        setGroupLeaderBtn.addActionListener(new java.awt.event.ActionListener() {
+        changeGroupLeaderBtn.setText("Change group leader");
+        changeGroupLeaderBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setGroupLeaderBtnActionPerformed(evt);
+                changeGroupLeaderBtnActionPerformed(evt);
             }
         });
+
+        groupNameLabel.setText("Group name");
+
+        groupNameTextField.setEditable(false);
+        groupNameTextField.setText("jTextField1");
+
+        changeGroupName.setText("Change group name");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manageGroupTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(manageGroupTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(deleteGroupBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(setGroupLeaderBtn))
-                    .addComponent(users_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(130, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(123, 123, 123)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(deleteGroupBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(changeGroupLeaderBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(changeGroupName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(users_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(148, 148, 148)
+                                .addComponent(groupNameLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(groupNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 120, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(manageGroupTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(groupNameLabel)
+                    .addComponent(groupNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(users_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(users_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteGroupBtn)
-                    .addComponent(setGroupLeaderBtn))
+                    .addComponent(changeGroupLeaderBtn)
+                    .addComponent(changeGroupName))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -142,9 +166,9 @@ public class ManageGroupView extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setGroupLeaderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setGroupLeaderBtnActionPerformed
+    private void changeGroupLeaderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeGroupLeaderBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_setGroupLeaderBtnActionPerformed
+    }//GEN-LAST:event_changeGroupLeaderBtnActionPerformed
     
     public void desplegarDatos()
     {
@@ -185,31 +209,34 @@ public class ManageGroupView extends javax.swing.JFrame
         return usuarios_grupo;
     }
     
-    public void setDelete_list_user( List < Usuario > lista )
-    {
-        usuarios_eliminar = lista;
-    }
-    
-    public List < Usuario > getDelete_list_user()
-    {
-        return usuarios_eliminar;
-    }
-    
     public javax.swing.JButton getGroupLeaderBtn()
     {
-        return setGroupLeaderBtn;
+        return changeGroupLeaderBtn;
     }
     
     public javax.swing.JTable getUsers_table()
     {
         return users_table;
     }
-
+    
+    public javax.swing.JButton getChangeGroupNameBtn()
+    {
+        return changeGroupLeaderBtn;
+    }
+    
+    public javax.swing.JTextField getGroupNameTextField()
+    {
+        return groupNameTextField;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton changeGroupLeaderBtn;
+    private javax.swing.JButton changeGroupName;
     private javax.swing.JButton deleteGroupBtn;
+    private javax.swing.JLabel groupNameLabel;
+    private javax.swing.JTextField groupNameTextField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel manageGroupTitle;
-    private javax.swing.JButton setGroupLeaderBtn;
     private javax.swing.JScrollPane users_scrollPane;
     private javax.swing.JTable users_table;
     // End of variables declaration//GEN-END:variables

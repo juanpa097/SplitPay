@@ -38,22 +38,38 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="manageGroupTitle" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="deleteGroupBtn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="setGroupLeaderBtn" min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="manageGroupTitle" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="users_scrollPane" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="deleteGroupBtn" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="changeGroupLeaderBtn" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="changeGroupName" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="users_scrollPane" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="groupNameLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="groupNameTextField" min="-2" pref="273" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="120" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="130" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -62,12 +78,18 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="manageGroupTitle" min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="groupNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="groupNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="users_scrollPane" min="-2" pref="293" max="-2" attributes="0"/>
+                  <Component id="users_scrollPane" min="-2" pref="249" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="deleteGroupBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="setGroupLeaderBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="changeGroupLeaderBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="changeGroupName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
@@ -131,13 +153,29 @@
             <Property name="text" type="java.lang.String" value="Delete selected from group"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="setGroupLeaderBtn">
+        <Component class="javax.swing.JButton" name="changeGroupLeaderBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Set as group leader"/>
+            <Property name="text" type="java.lang.String" value="Change group leader"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setGroupLeaderBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeGroupLeaderBtnActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="groupNameLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Group name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="groupNameTextField">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="jTextField1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="changeGroupName">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Change group name"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

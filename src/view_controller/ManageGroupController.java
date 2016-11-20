@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import vista.MainView;
 import vista.ManageGroupView;
 
 public class ManageGroupController implements ActionListener
@@ -62,11 +63,11 @@ public class ManageGroupController implements ActionListener
                 }   
         }
         currentView.setGroup_list_user(usuarios);
-        currentView.setDelete_list_user(new ArrayList <> ());
+        currentView.getGroupNameTextField().setText(getGroupName());
         currentView.desplegarDatos();
     }
     
-    public void delete_members( List < String > delete )
+    private void delete_members( List < String > delete )
     {
         Connection con = null;
         try
@@ -98,7 +99,7 @@ public class ManageGroupController implements ActionListener
         currentView.init();
     }
     
-    public void deleteGroupBtnAction()
+    private void deleteGroupBtnAction()
     {
         ArrayList< String > emails_delete = new ArrayList<>();
         for (int i = 0; i < currentView.getUsers_table().getRowCount(); ++i)
@@ -113,10 +114,38 @@ public class ManageGroupController implements ActionListener
         delete_members(emails_delete);
     }
     
-    public void groupLeaderBtnAction()
+    private String getGroupName()
     {
-        
+        ResultSet rs = null;
+        Connection con = null;
+        try
+        {
+            con = Conexion.getConnection();
+            PreparedStatement ps = con.prepareStatement( "SELECT GRUPO.NAME AS NOMBRE FROM GRUPO "
+            + "WHERE GRUPO.ID = ?");
+            ps.setBigDecimal( 1 , currentView.getGroupID() );
+            rs = ps.executeQuery();
+            while(rs.next())
+                return rs.getString("NOMBRE");
+        }
+        catch( SQLException ex )
+        {
+            Logger.getLogger( Grupo.class.getName() ).log( Level.SEVERE , null , ex );
+        }
+        finally
+        {
+            if( con != null )
+                try
+                {
+                    con.close();
+                }catch (SQLException ex)
+                {
+                    Logger.getLogger(ManageGroupView.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+        }
+        return "";
     }
+    
     
     @Override
     public void actionPerformed(ActionEvent e)
@@ -124,7 +153,11 @@ public class ManageGroupController implements ActionListener
         if( e.getSource().equals( currentView.getDeleteGroupBtn() ) )
             deleteGroupBtnAction();
         else if( e.getSource().equals( currentView.getGroupLeaderBtn() ) )
-            groupLeaderBtnAction();
+        {
+            currentView.setVisible(false);
+            MainView.getChangeGroupLeaderView().init();
+            MainView.getChangeGroupLeaderView().setVisible(true);
+        }
     }
     
 }
