@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -256,15 +257,29 @@ public class BillJpaController implements Serializable {
         Connection conn = DriverManager.getConnection(thinConn, user, passwd);
         conn.setAutoCommit(true);
         PreparedStatement ps = conn.prepareStatement("INSERT INTO BILL (IMAGE, AMOUNT, TITTLE, ID_RESPONSABLE, ID_GROUP) VALUES ('null',?,?,?,?)");
-        
-        ps.setString(1, amount.toString());
+        ps.setBigDecimal(1, amount);
         ps.setString(2, tittle);
         ps.setString(3, responsable);
-        ps.setString(4, idGroup.toString());
+        ps.setBigDecimal(4, idGroup);
         
         ps.executeUpdate();
         ps.close();
-        
     }
+    
+    public BigDecimal getLastBillID () throws SQLException {
+        String thinConn = "jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDISOR";
+        String user = "is102621";
+        String passwd = "jQPXnBbKRt";
+        DriverManager.registerDriver(new OracleDriver());
+        Connection conn = DriverManager.getConnection(thinConn, user, passwd);
+        conn.setAutoCommit(true);
+        PreparedStatement ps = conn.prepareStatement("select ID from BILL where ID = ( select max(ID) from BILL )");
+        ResultSet resultSet = ps.executeQuery("select ID from BILL where ID = ( select max(ID) from BILL )");
+        BigDecimal lastId = null; 
+        while (resultSet.next())
+            lastId = resultSet.getBigDecimal("ID");
+        return lastId;
+    }
+    
     
 }

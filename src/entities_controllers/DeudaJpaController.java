@@ -15,13 +15,17 @@ import entities.Deuda;
 import entities.DeudaPK;
 import entities.Usuario;
 import entities.Transaction;
+import entities.UserXGroup;
+import entities.UserXGroupPK;
 import entities_controllers.exceptions.IllegalOrphanException;
 import entities_controllers.exceptions.NonexistentEntityException;
 import entities_controllers.exceptions.PreexistingEntityException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import view_controller.EntityFactorySingleton;
 
 /**
  *
@@ -269,6 +273,19 @@ public class DeudaJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
+        }
+    }
+    
+    public void addOwers(ArrayList<String> emails, BigDecimal amoutToEncreaseToEach, Bill bill) throws NonexistentEntityException, Exception {
+        EntityManager em = getEntityManager();
+        UsuarioJpaController usrCtrl = new UsuarioJpaController(EntityFactorySingleton.getEMF());
+        for (int i = 0; i < emails.size(); ++i) {
+            Usuario tempUsr = usrCtrl.findUsuario(emails.get(i));
+            DeudaPK pk = new DeudaPK(emails.get(i), bill.getId());
+            Deuda newDeuda = new Deuda(pk, amoutToEncreaseToEach);
+            newDeuda.setBill(bill);
+            newDeuda.setUsuario(tempUsr);
+            create(newDeuda);
         }
     }
     

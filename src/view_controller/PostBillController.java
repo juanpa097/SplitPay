@@ -1,6 +1,8 @@
 package view_controller;
 
+import entities.Bill;
 import entities_controllers.BillJpaController;
+import entities_controllers.DeudaJpaController;
 import entities_controllers.GrupoJpaController;
 import entities_controllers.UserXGroupJpaController;
 import java.awt.event.ActionEvent;
@@ -15,13 +17,11 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import vista.MainView;
 import vista.PostBillView;
 
 public class PostBillController implements ActionListener {
 
     private PostBillView currentView;
-
     private File imageFile;
     
     public PostBillController(PostBillView view) {
@@ -33,13 +33,14 @@ public class PostBillController implements ActionListener {
         if (e.getSource().equals(currentView.getConfirmBtn())) {
             if (validateFields()) {
                 increaseUsersBalance();
+                insertBill();
+                generateOwes();
             }
         }
         if (e.getSource().equals(currentView.getSelectImageBtn())) {
             JFileChooser jFile = new JFileChooser();
             jFile.showOpenDialog(null);
             imageFile = jFile.getSelectedFile();
-            //insertBill();
         }
     }
     
@@ -157,12 +158,34 @@ public class PostBillController implements ActionListener {
         BigDecimal amoun = new BigDecimal(currentView.getAmountField().getText());
         String tittle = currentView.getTittleBillField().getText();
         String responsable = "juanpenaloza@gmail.com";
-        BigDecimal groupID = currentView.getCurrentGroupID();
+        //BigDecimal groupID = currentView.getCurrentGroupID();
+        // TODO: Estos valores no son correctors! 
+        BigDecimal groupID = new BigDecimal(21);
+
         try {
             billCtrl.insertBill( amoun, tittle, responsable, groupID);
         } catch (SQLException ex) {
             Logger.getLogger(PostBillController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(PostBillController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+    private void generateOwes () {
+        ArrayList<String> payersEmails = payersEmails();
+        double amount = getAmount();
+        double numPayer = countPayers();
+        double incrEach = amount / numPayer;
+        Math.round(incrEach);
+        BigDecimal toAdd = new BigDecimal(incrEach);
+        BillJpaController billCtrl = new BillJpaController(EntityFactorySingleton.getEMF());
+        DeudaJpaController deudaCtrl = new DeudaJpaController(EntityFactorySingleton.getEMF());
+        try {
+            Bill bill = billCtrl.findBill(billCtrl.getLastBillID());
+            deudaCtrl.addOwers(payersEmails, toAdd, bill);
+        } catch (Exception ex) {
             Logger.getLogger(PostBillController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
