@@ -1,21 +1,29 @@
 package view_controller;
 
+import entities_controllers.BillJpaController;
 import entities_controllers.GrupoJpaController;
 import entities_controllers.UserXGroupJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vista.MainView;
 import vista.PostBillView;
 
 public class PostBillController implements ActionListener {
 
     private PostBillView currentView;
 
+    private File imageFile;
+    
     public PostBillController(PostBillView view) {
         currentView = view;
     }
@@ -23,9 +31,15 @@ public class PostBillController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(currentView.getConfirmBtn())) {
-            if (validateAmountField()) {
+            if (validateFields()) {
                 increaseUsersBalance();
             }
+        }
+        if (e.getSource().equals(currentView.getSelectImageBtn())) {
+            JFileChooser jFile = new JFileChooser();
+            jFile.showOpenDialog(null);
+            imageFile = jFile.getSelectedFile();
+            //insertBill();
         }
     }
     
@@ -48,7 +62,7 @@ public class PostBillController implements ActionListener {
         }
     }
     
-    private boolean validateAmountField() {
+    private boolean validateFields() {
         if (!isInteger(currentView.getAmountField().getText())) {
             new JOptionPane().showMessageDialog(currentView,
                     "Ingrese un amount valido.",
@@ -59,6 +73,13 @@ public class PostBillController implements ActionListener {
         if (isAmountEmpty()) {
             new JOptionPane().showMessageDialog(currentView,
                     "Ingrese un amount.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (isTittleEmpty()) {
+            new JOptionPane().showMessageDialog(currentView,
+                    "Ingrese unmbre para el Bill.",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             return false;
@@ -76,6 +97,10 @@ public class PostBillController implements ActionListener {
 
     private boolean isAmountEmpty() {
         return currentView.getAmountField().getText().equals("");
+    }
+    
+    private boolean isTittleEmpty() {
+        return currentView.getTittleBillField().getText().equals("");
     }
 
     private ArrayList<String> payersEmails() {
@@ -120,6 +145,26 @@ public class PostBillController implements ActionListener {
             return false;
         }
         return true;
+    }
+    
+    private double getAmount() {
+        Double amount = new Double(currentView.getAmountField().getText());
+        return amount;
+    }
+    
+    private void insertBill() {
+        BillJpaController billCtrl = new BillJpaController(EntityFactorySingleton.getEMF());
+        BigDecimal amoun = new BigDecimal(currentView.getAmountField().getText());
+        String tittle = currentView.getTittleBillField().getText();
+        String responsable = "juanpenaloza@gmail.com";
+        BigDecimal groupID = currentView.getCurrentGroupID();
+        try {
+            billCtrl.insertBill( amoun, tittle, responsable, groupID);
+        } catch (SQLException ex) {
+            Logger.getLogger(PostBillController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PostBillController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

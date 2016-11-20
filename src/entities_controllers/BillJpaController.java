@@ -16,11 +16,20 @@ import entities.Deuda;
 import entities_controllers.exceptions.IllegalOrphanException;
 import entities_controllers.exceptions.NonexistentEntityException;
 import entities_controllers.exceptions.PreexistingEntityException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import oracle.jdbc.OracleDriver;
 
 /**
  *
@@ -234,6 +243,28 @@ public class BillJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public void insertBill (BigDecimal amount, String tittle, String responsable, BigDecimal idGroup) throws FileNotFoundException, SQLException, IOException {
+        
+        String thinConn = "jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDISOR";
+        String user = "is102621";
+        String passwd = "jQPXnBbKRt";
+                
+        DriverManager.registerDriver(new OracleDriver());
+        
+        Connection conn = DriverManager.getConnection(thinConn, user, passwd);
+        conn.setAutoCommit(true);
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO BILL (IMAGE, AMOUNT, TITTLE, ID_RESPONSABLE, ID_GROUP) VALUES ('null',?,?,?,?)");
+        
+        ps.setString(1, amount.toString());
+        ps.setString(2, tittle);
+        ps.setString(3, responsable);
+        ps.setString(4, idGroup.toString());
+        
+        ps.executeUpdate();
+        ps.close();
+        
     }
     
 }
