@@ -19,19 +19,18 @@ import entities_controllers.exceptions.PreexistingEntityException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import oracle.jdbc.OracleDriver;
 
 /**
  *
@@ -246,36 +245,33 @@ public class BillJpaController implements Serializable {
             em.close();
         }
     }
-    
-    public void insertBill (BigDecimal amount, String tittle, String responsable, BigDecimal idGroup, File image) throws FileNotFoundException, SQLException, IOException {
+
+    public void insertBill(BigDecimal amount, String tittle, String responsable, BigDecimal idGroup, File image) throws FileNotFoundException, SQLException, IOException {
         Connection conn = Conexion.getConnection();
         conn.setAutoCommit(true);
-        
         FileInputStream input = new FileInputStream(image);
-        
         PreparedStatement ps = conn.prepareStatement("INSERT INTO BILL (AMOUNT, TITTLE, ID_RESPONSABLE, ID_GROUP, IMAGE) VALUES (?,?,?,?,?)");
-        
         ps.setBigDecimal(1, amount);
         ps.setString(2, tittle);
         ps.setString(3, responsable);
         ps.setBigDecimal(4, idGroup);
         ps.setBinaryStream(5, input);
-        
         ps.executeUpdate();
         ps.close();
     }
-    
-    public BigDecimal getLastBillID () throws SQLException {
+
+    public BigDecimal getLastBillID() throws SQLException {
         Connection conn = Conexion.getConnection();
         conn.setAutoCommit(true);
         PreparedStatement ps = conn.prepareStatement("select ID from BILL where ID = ( select max(ID) from BILL )");
         ResultSet resultSet = ps.executeQuery("select ID from BILL where ID = ( select max(ID) from BILL )");
-        BigDecimal lastId = null; 
-        while (resultSet.next())
+        BigDecimal lastId = null;
+        while (resultSet.next()) {
             lastId = resultSet.getBigDecimal("ID");
+        }
         return lastId;
     }
-    
+
     public String getListGroups() {
         EntityManager em = getEntityManager();
         Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
@@ -285,25 +281,29 @@ public class BillJpaController implements Serializable {
             String nam = (String) names.get(i);
             String temp = "'";
             temp += nam;
-            if (i != names.size() - 1) temp+="',";
-            else temp+="'";
+            if (i != names.size() - 1) {
+                temp += "',";
+            } else {
+                temp += "'";
+            }
             list += temp;
         }
         return list;
     }
-    
+
     public String[] getArrayGroupNames() {
         EntityManager em = getEntityManager();
         Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
         List<Object> names = getList.getResultList();
-        String [] grpNames = new String[names.size() + 2];
+        String[] grpNames = new String[names.size() + 2];
         grpNames[0] = "Fecha";
-        for (int i = 0; i < names.size(); ++i)
-            grpNames[i+1] = (String) names.get(i);
+        for (int i = 0; i < names.size(); ++i) {
+            grpNames[i + 1] = (String) names.get(i);
+        }
         grpNames[names.size() + 1] = "Total";
         return grpNames;
     }
-    
+
     public int getCountGroups() {
         EntityManager em = getEntityManager();
         Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
@@ -311,28 +311,31 @@ public class BillJpaController implements Serializable {
         int cont = names.size();
         return cont;
     }
-    
+
     public Object[][] billReport() {
         EntityManager em = getEntityManager();
         String listGroups = getListGroups();
         Query getList = em.createNativeQuery("WITH CONSULT AS (SELECT TO_CHAR(fecha,'DD/MM/YYYY') AS FECHA, AMOUNT, GRUPO.NAME FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID) SELECT * FROM CONSULT PIVOT (SUM(AMOUNT) FOR (NAME) IN (" + listGroups + "))");
         List<Object[]> result = getList.getResultList();
-        Object [][] model = new Object[result.size() + 1][getCountGroups() + 2];
+        Object[][] model = new Object[result.size() + 1][getCountGroups() + 2];
         for (int i = 0; i < result.size(); ++i) {
             Object[] temp = result.get(i);
-            
+
             String date = (String) temp[0];
             model[i][0] = date;
-            
+
             System.out.println("Date: " + date + " ");
             for (int j = 1; j < temp.length; ++j) {
-                if (temp[j] == null) model[i][j] = BigDecimal.ZERO;
-                else model[i][j] = (BigDecimal) temp[j];
-                System.out.print("Val: " + (BigDecimal)model[i][j]);
+                if (temp[j] == null) {
+                    model[i][j] = BigDecimal.ZERO;
+                } else {
+                    model[i][j] = (BigDecimal) temp[j];
+                }
+                System.out.print("Val: " + (BigDecimal) model[i][j]);
             }
             System.out.println("");
         }
-        
+
         for (int j = 0; j < model.length - 1; ++j) {
             Object[] objects = model[j];
             int total = 0;
@@ -341,10 +344,10 @@ public class BillJpaController implements Serializable {
                 total += current.intValue();
             }
             model[j][objects.length - 1] = new BigDecimal(total);
-            System.out.println("SUM: " + (BigDecimal)model[j][objects.length - 1]);
+            System.out.println("SUM: " + (BigDecimal) model[j][objects.length - 1]);
         }
         model[model.length - 1][0] = "TOTAL";
-        
+
         for (int j = 1; j < model[0].length; ++j) {
             int total = 0;
             for (int i = 0; i < model.length - 1; ++i) {
@@ -353,9 +356,43 @@ public class BillJpaController implements Serializable {
             }
             model[model.length - 1][j] = new BigDecimal(total);
         }
-        
-        
         return model;
     }
-    
+
+    public String[][] getGroupBill(BigDecimal idGroup) {
+        EntityManager em = getEntityManager();
+        Query groupBill = em.createNativeQuery("SELECT TO_CHAR(ID), TO_CHAR(fecha,'DD/MM/YYYY'), TITTLE, ID_RESPONSABLE, TO_CHAR(AMOUNT) FROM Bill where ID_GROUP = ?");
+        groupBill.setParameter(1, idGroup);
+        List<Object[]> result = groupBill.getResultList();
+        String[][] model = new String[result.size()][5];
+        for (int i = 0; i < result.size(); ++i) {
+            for (int j = 0; j < 5; ++j) {
+                model[i][j] = (String) result.get(i)[j];
+            }
+        }
+        return model;
+    }
+
+    public File getBillImage(BigDecimal id) throws SQLException, IOException {
+        Connection conn = Conexion.getConnection();
+        PreparedStatement stmt = conn.prepareCall("SELECT IMAGE FROM BILL WHERE ID = ?");
+        stmt.setBigDecimal(1, id);
+        ResultSet resultSet = stmt.executeQuery();
+        File image = null;
+        while (resultSet.next()) {
+            String path = System.getProperty("user.dir")+File.pathSeparator+"url.jpg";
+            image = new File(path);
+            FileOutputStream fos = new FileOutputStream(image);
+
+            byte[] buffer = new byte[1];
+            InputStream is = resultSet.getBinaryStream("IMAGE");
+            while (is.read(buffer) > 0) {
+                fos.write(buffer);
+            }
+            fos.close();
+        }
+        conn.close();
+        return image;
+    }
+
 }
