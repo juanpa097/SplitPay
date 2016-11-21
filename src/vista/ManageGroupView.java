@@ -1,17 +1,9 @@
 package vista;
 
-import entities.Grupo;
 import entities.Usuario;
-import entities_controllers.Conexion;
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import view_controller.ManageGroupController;
 
@@ -29,6 +21,7 @@ public class ManageGroupView extends javax.swing.JFrame
         controller = new ManageGroupController(this);
         changeGroupLeaderBtn.addActionListener(controller);
         deleteGroupBtn.addActionListener(controller);
+        changeGroupNameBtn.addActionListener(controller);
         desplegarDatos();
     }
     
@@ -36,6 +29,11 @@ public class ManageGroupView extends javax.swing.JFrame
     public void init()
     {
         controller.init();
+    }
+    
+    public void updateGroupName()
+    {
+        controller.refreshName();
     }
 
     /**
@@ -55,7 +53,7 @@ public class ManageGroupView extends javax.swing.JFrame
         changeGroupLeaderBtn = new javax.swing.JButton();
         groupNameLabel = new javax.swing.JLabel();
         groupNameTextField = new javax.swing.JTextField();
-        changeGroupName = new javax.swing.JButton();
+        changeGroupNameBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,7 +100,7 @@ public class ManageGroupView extends javax.swing.JFrame
         groupNameTextField.setEditable(false);
         groupNameTextField.setText("jTextField1");
 
-        changeGroupName.setText("Change group name");
+        changeGroupNameBtn.setText("Change group name");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,7 +121,7 @@ public class ManageGroupView extends javax.swing.JFrame
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(changeGroupLeaderBtn)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(changeGroupName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(changeGroupNameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(users_scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(148, 148, 148)
@@ -148,7 +146,7 @@ public class ManageGroupView extends javax.swing.JFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteGroupBtn)
                     .addComponent(changeGroupLeaderBtn)
-                    .addComponent(changeGroupName))
+                    .addComponent(changeGroupNameBtn))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -221,7 +219,7 @@ public class ManageGroupView extends javax.swing.JFrame
     
     public javax.swing.JButton getChangeGroupNameBtn()
     {
-        return changeGroupLeaderBtn;
+        return changeGroupNameBtn;
     }
     
     public javax.swing.JTextField getGroupNameTextField()
@@ -231,7 +229,7 @@ public class ManageGroupView extends javax.swing.JFrame
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton changeGroupLeaderBtn;
-    private javax.swing.JButton changeGroupName;
+    private javax.swing.JButton changeGroupNameBtn;
     private javax.swing.JButton deleteGroupBtn;
     private javax.swing.JLabel groupNameLabel;
     private javax.swing.JTextField groupNameTextField;

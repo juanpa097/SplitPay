@@ -114,6 +114,12 @@ public class ManageGroupController implements ActionListener
         delete_members(emails_delete);
     }
     
+    public void refreshName()
+    {
+        String newOne = getGroupName();
+        currentView.getGroupNameTextField().setText(newOne);
+    }
+    
     private String getGroupName()
     {
         ResultSet rs = null;
@@ -150,6 +156,7 @@ public class ManageGroupController implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        System.out.println("bullshitx2");
         if( e.getSource().equals( currentView.getDeleteGroupBtn() ) )
             deleteGroupBtnAction();
         else if( e.getSource().equals( currentView.getGroupLeaderBtn() ) )
@@ -157,6 +164,13 @@ public class ManageGroupController implements ActionListener
             currentView.setVisible(false);
             MainView.getChangeGroupLeaderView().init();
             MainView.getChangeGroupLeaderView().setVisible(true);
+        }
+        else if( e.getSource().equals( currentView.getChangeGroupNameBtn() ) )
+        {
+            System.out.println("bullshit");
+            currentView.setVisible(false);
+            MainView.getChangeGroupNameView().setVisible(true);
+            MainView.getChangeGroupNameView().init();
         }
     }
     

@@ -85,6 +85,7 @@ public class MainView extends javax.swing.JFrame {
     private static MainMenuView mainMenuView;
     private static ManageGroupView manageGroupView;
     private static ChangeGroupLeaderView changeGroupLeaderView;
+    private static ChangeGroupNameView changeGroupNameView;
     
     private static EntityFactorySingleton contro;
     private static Usuario actual_user;
@@ -99,6 +100,7 @@ public class MainView extends javax.swing.JFrame {
         mainMenuView = new MainMenuView();
         manageGroupView = new ManageGroupView();
         changeGroupLeaderView = new ChangeGroupLeaderView();
+        changeGroupNameView = new ChangeGroupNameView();
     }
 
     public static LogInView getLogInView() {
@@ -143,4 +145,10 @@ public class MainView extends javax.swing.JFrame {
     public static ChangeGroupLeaderView getChangeGroupLeaderView() {
         return changeGroupLeaderView;
     }
+    
+    public static ChangeGroupNameView getChangeGroupNameView()
+    {
+        return changeGroupNameView;
+    }
+    
 }

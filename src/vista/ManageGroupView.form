@@ -54,7 +54,7 @@
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="changeGroupLeaderBtn" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="changeGroupName" max="32767" attributes="0"/>
+                                          <Component id="changeGroupNameBtn" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="users_scrollPane" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -89,7 +89,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="deleteGroupBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="changeGroupLeaderBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="changeGroupName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="changeGroupNameBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
@@ -172,7 +172,7 @@
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="changeGroupName">
+        <Component class="javax.swing.JButton" name="changeGroupNameBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Change group name"/>
           </Properties>
