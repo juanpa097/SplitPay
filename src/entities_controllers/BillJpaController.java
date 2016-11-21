@@ -26,6 +26,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -274,11 +275,82 @@ public class BillJpaController implements Serializable {
         EntityManager em = getEntityManager();
         Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
         List<Object> names = getList.getResultList();
-        for (Object name : names) {
-            String nam = (String) name;
-            System.out.println(nam);
+        String list = "";
+        for (int i = 0; i < names.size(); ++i) {
+            String nam = (String) names.get(i);
+            String temp = "'";
+            temp += nam;
+            if (i != names.size() - 1) temp+="',";
+            else temp+="'";
+            list += temp;
         }
-        return "Hi";
+        return list;
+    }
+    
+    public String[] getArrayGroupNames() {
+        EntityManager em = getEntityManager();
+        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
+        List<Object> names = getList.getResultList();
+        String [] grpNames = new String[names.size() + 2];
+        grpNames[0] = "Fecha";
+        for (int i = 0; i < names.size(); ++i)
+            grpNames[i+1] = (String) names.get(i);
+        grpNames[names.size() + 1] = "Total";
+        return grpNames;
+    }
+    
+    public int getCountGroups() {
+        EntityManager em = getEntityManager();
+        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
+        List<Object> names = getList.getResultList();
+        int cont = names.size();
+        return cont;
+    }
+    
+    public Object[][] billReport() {
+        EntityManager em = getEntityManager();
+        String listGroups = getListGroups();
+        Query getList = em.createNativeQuery("WITH CONSULT AS (SELECT TO_CHAR(fecha,'DD/MM/YYYY') AS FECHA, AMOUNT, GRUPO.NAME FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID) SELECT * FROM CONSULT PIVOT (SUM(AMOUNT) FOR (NAME) IN (" + listGroups + "))");
+        List<Object[]> result = getList.getResultList();
+        Object [][] model = new Object[result.size() + 1][getCountGroups() + 2];
+        for (int i = 0; i < result.size(); ++i) {
+            Object[] temp = result.get(i);
+            
+            String date = (String) temp[0];
+            model[i][0] = date;
+            
+            System.out.println("Date: " + date + " ");
+            for (int j = 1; j < temp.length; ++j) {
+                if (temp[j] == null) model[i][j] = BigDecimal.ZERO;
+                else model[i][j] = (BigDecimal) temp[j];
+                System.out.print("Val: " + (BigDecimal)model[i][j]);
+            }
+            System.out.println("");
+        }
+        
+        for (int j = 0; j < model.length - 1; ++j) {
+            Object[] objects = model[j];
+            int total = 0;
+            for (int i = 1; i < objects.length - 1; ++i) {
+                BigDecimal current = (BigDecimal) objects[i];
+                total += current.intValue();
+            }
+            model[j][objects.length - 1] = new BigDecimal(total);
+            System.out.println("SUM: " + (BigDecimal)model[j][objects.length - 1]);
+        }
+        model[model.length - 1][0] = "TOTAL";
+        
+        for (int j = 1; j < model[0].length; ++j) {
+            int total = 0;
+            for (int i = 0; i < model.length - 1; ++i) {
+                BigDecimal current = (BigDecimal) model[i][j];
+                total += current.intValue();
+            }
+            model[model.length - 1][j] = new BigDecimal(total);
+        }
+        
+        
+        return model;
     }
     
 }

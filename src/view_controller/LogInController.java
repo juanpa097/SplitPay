@@ -71,6 +71,7 @@ public class LogInController implements ActionListener {
     private void reportAction() {
         currentView.setVisible(false);
         MainView.getReporteBillView().setVisible(true);
+        MainView.getReporteBillView().getReportCtrl().loadTable();
     }
     
     private void transacionAction () {
