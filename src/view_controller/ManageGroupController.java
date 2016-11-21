@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import vista.MainView;
 import vista.ManageGroupView;
 
@@ -69,17 +70,59 @@ public class ManageGroupController implements ActionListener
     
     private void delete_members( List < String > delete )
     {
+        if( validate() )
+        {
+            Connection con = null;
+            try
+            {
+                con = Conexion.getConnection();
+                for( int i = 0 ; i < delete.size() ; ++i )
+                {
+                    if( delete.get(i).equals( MainView.getActual_user().getEmail() ) )
+                    {
+                        JOptionPane.showMessageDialog(currentView,
+                        "You can't delete the leader.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                        continue;
+                    }
+                    PreparedStatement ps = con.prepareStatement( "DELETE FROM USER_X_GROUP WHERE USER_EMAIL = ? AND GROUP_ID = ? " );
+                    ps.setString( 1 , delete.get(i) );
+                    ps.setBigDecimal( 2 , currentView.getGroupID() );
+                    ps.executeUpdate();
+                }
+            }
+            catch( SQLException ex )
+            {
+                Logger.getLogger( Grupo.class.getName() ).log( Level.SEVERE , null , ex );
+            }
+            finally
+            {
+                if( con != null )
+                    try
+                    {
+                        con.close();
+                    }catch (SQLException ex)
+                    {
+                        Logger.getLogger(ManageGroupView.class.getName()).log(Level.SEVERE, null, ex);
+                    }   
+            }
+            currentView.init();
+        }
+    }
+    
+    private String getLeaderEmail()
+    {
+        ResultSet rs = null;
         Connection con = null;
         try
         {
             con = Conexion.getConnection();
-            for( int i = 0 ; i < delete.size() ; ++i )
-            {
-                PreparedStatement ps = con.prepareStatement( "DELETE FROM USER_X_GROUP WHERE USER_EMAIL = ? AND GROUP_ID = ? " );
-                ps.setString( 1 , delete.get(i) );
-                ps.setBigDecimal( 2 , currentView.getGroupID() );
-                ps.executeUpdate();
-            }
+            PreparedStatement ps = con.prepareStatement( "SELECT GRUPO.LEADER_EMAIL AS LEADER FROM GRUPO WHERE GRUPO.ID = ?" );
+            ps.setBigDecimal( 1 , MainView.getManageGroupView().getGroupID() );
+            rs = ps.executeQuery();
+            while(rs.next())
+                return rs.getString("LEADER");
         }
         catch( SQLException ex )
         {
@@ -96,7 +139,18 @@ public class ManageGroupController implements ActionListener
                     Logger.getLogger(ManageGroupView.class.getName()).log(Level.SEVERE, null, ex);
                 }   
         }
-        currentView.init();
+        return "";
+    }
+    
+    private boolean validate()
+    {
+        if( MainView.getActual_user().getEmail().equals( getLeaderEmail() ) )
+            return true;
+        JOptionPane.showMessageDialog(currentView,
+        "No eres lider , no puedes modificar el grupo.",
+        "Error",
+        JOptionPane.ERROR_MESSAGE);
+        return false;
     }
     
     private void deleteGroupBtnAction()
@@ -154,23 +208,32 @@ public class ManageGroupController implements ActionListener
     
     private void groupLeaderBtnAction()
     {
+        if( validate() )
+        {
             currentView.setVisible(false);
             MainView.getChangeGroupLeaderView().init();
             MainView.getChangeGroupLeaderView().setVisible(true);
+        }
     }
     
     private void changeGroupNameBtnAction()
     {
-        currentView.setVisible(false);
-        MainView.getChangeGroupNameView().setVisible(true);
-        MainView.getChangeGroupNameView().init();
+        if( validate() )
+        {
+            currentView.setVisible(false);
+            MainView.getChangeGroupNameView().setVisible(true);
+            MainView.getChangeGroupNameView().init();
+        }
     }
 
     private void addMemberBtnAction()
     {
-        currentView.setVisible(false);
-        MainView.getManagementAddMemberView().init();
-        MainView.getManagementAddMemberView().setVisible(true);
+        if( validate() )
+        {
+            currentView.setVisible(false);
+            MainView.getManagementAddMemberView().init();
+            MainView.getManagementAddMemberView().setVisible(true);
+        }
     }
     
     private void goBack()
