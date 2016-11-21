@@ -78,7 +78,8 @@ public class AddMemberController implements ActionListener
             cancelBtnAction();
     }
     
-    private void prepareComboBox() {
+    private void prepareComboBox()
+    {
         UsuarioJpaController usrCrtl = new UsuarioJpaController(EntityFactorySingleton.getEMF());
         List<String> emailList = usrCrtl.getAllUsersEmail();
         Object[] modelEmail = emailList.toArray();

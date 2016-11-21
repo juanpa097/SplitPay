@@ -176,8 +176,8 @@ public class ManageGroupController implements ActionListener
     private void goBack()
     {
         currentView.setVisible(false);
-        MainView.getManageGroupView().init();
-        MainView.getManageGroupView().setVisible(true);
+        MainView.getViewGroupView().init();
+        MainView.getViewGroupView().setVisible(true);
     }
     
     @Override

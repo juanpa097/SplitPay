@@ -23,6 +23,7 @@ public class ManageGroupView extends javax.swing.JFrame
         deleteGroupBtn.addActionListener(controller);
         changeGroupNameBtn.addActionListener(controller);
         addMemberBtn.addActionListener(controller);
+        goBackBtn.addActionListener(controller);
         desplegarDatos();
     }
     

@@ -120,13 +120,13 @@ public class CreateGroupController implements ActionListener
                 nuevo.setUsuario(MainView.getActual_user());
                 nuevo.setUserXGroupPK( new UserXGroupPK( MainView.getActual_user().getEmail() , group_id ) );
                 controller_users.create(nuevo);
+                MainView.getMainMenuView().getMenuCtrl().loadTable(MainView.getActual_user().getEmail());
+                goBack();
             }catch (Exception ex)
             {
                 Logger.getLogger(CreateGroupController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        MainView.getMainMenuView().getMenuCtrl().loadTable(MainView.getActual_user().getEmail());
-        goBack();
     }
     
     @Override
