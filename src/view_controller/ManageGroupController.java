@@ -152,26 +152,38 @@ public class ManageGroupController implements ActionListener
         return "";
     }
     
+    private void groupLeaderBtnAction()
+    {
+            currentView.setVisible(false);
+            MainView.getChangeGroupLeaderView().init();
+            MainView.getChangeGroupLeaderView().setVisible(true);
+    }
+    
+    private void changeGroupNameBtnAction()
+    {
+        currentView.setVisible(false);
+        MainView.getChangeGroupNameView().setVisible(true);
+        MainView.getChangeGroupNameView().init();
+    }
+
+    private void addMemberBtnAction()
+    {
+        currentView.setVisible(false);
+        MainView.getManagementAddMemberView().init();
+        MainView.getManagementAddMemberView().setVisible(true);
+    }
     
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println("bullshitx2");
         if( e.getSource().equals( currentView.getDeleteGroupBtn() ) )
             deleteGroupBtnAction();
         else if( e.getSource().equals( currentView.getGroupLeaderBtn() ) )
-        {
-            currentView.setVisible(false);
-            MainView.getChangeGroupLeaderView().init();
-            MainView.getChangeGroupLeaderView().setVisible(true);
-        }
+            groupLeaderBtnAction();
         else if( e.getSource().equals( currentView.getChangeGroupNameBtn() ) )
-        {
-            System.out.println("bullshit");
-            currentView.setVisible(false);
-            MainView.getChangeGroupNameView().setVisible(true);
-            MainView.getChangeGroupNameView().init();
-        }
+            changeGroupNameBtnAction();
+        else if( e.getSource().equals( currentView.getAddMemberBtn() ) )
+            addMemberBtnAction();
     }
     
 }
