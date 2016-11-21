@@ -87,6 +87,7 @@ public class MainView extends javax.swing.JFrame {
     private static ChangeGroupLeaderView changeGroupLeaderView;
     private static ChangeGroupNameView changeGroupNameView;
     private static ManagementAddMemberView managementAddMemberView;
+    private static ReporteBillView reporteBillView;
     
     private static EntityFactorySingleton contro;
     private static Usuario actual_user;
@@ -103,6 +104,7 @@ public class MainView extends javax.swing.JFrame {
         changeGroupLeaderView = new ChangeGroupLeaderView();
         changeGroupNameView = new ChangeGroupNameView();
         managementAddMemberView = new ManagementAddMemberView();
+        reporteBillView = new ReporteBillView();
     }
 
     public static LogInView getLogInView() {
@@ -156,6 +158,10 @@ public class MainView extends javax.swing.JFrame {
     public static ManagementAddMemberView getManagementAddMemberView()
     {
         return managementAddMemberView;
+    }
+
+    public static ReporteBillView getReporteBillView() {
+        return reporteBillView;
     }
     
 }

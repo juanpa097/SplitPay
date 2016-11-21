@@ -86,6 +86,8 @@
                                   <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
+                                  <Component id="reporteBtn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                                   <Component id="postBillBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                               </Group>
@@ -127,7 +129,10 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="manageGroupBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                  <Component id="postBillBtn" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="postBillBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reporteBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="transactionButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="75" max="32767" attributes="0"/>
@@ -193,6 +198,11 @@
         <Component class="javax.swing.JButton" name="manageGroupBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Group"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="reporteBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ver Reporte"/>
           </Properties>
         </Component>
       </SubComponents>

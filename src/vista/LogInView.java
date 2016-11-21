@@ -27,6 +27,7 @@ public class LogInView extends javax.swing.JFrame {
         postBillBtn.addActionListener(logInCtrl);
         transactionButton.addActionListener(logInCtrl);
         manageGroupBtn.addActionListener(logInCtrl);
+        reporteBtn.addActionListener(logInCtrl);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,6 +45,7 @@ public class LogInView extends javax.swing.JFrame {
         postBillBtn = new javax.swing.JButton();
         transactionButton = new javax.swing.JButton();
         manageGroupBtn = new javax.swing.JButton();
+        reporteBtn = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -93,6 +95,8 @@ public class LogInView extends javax.swing.JFrame {
 
         manageGroupBtn.setText("Manage Group");
 
+        reporteBtn.setText("Ver Reporte");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -122,6 +126,8 @@ public class LogInView extends javax.swing.JFrame {
                                 .addComponent(registerBtn)
                                 .addGap(348, 348, 348))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(reporteBtn)
+                                .addGap(85, 85, 85)
                                 .addComponent(postBillBtn)
                                 .addGap(135, 135, 135))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -152,7 +158,9 @@ public class LogInView extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(manageGroupBtn)
                 .addGap(2, 2, 2)
-                .addComponent(postBillBtn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(postBillBtn)
+                    .addComponent(reporteBtn))
                 .addGap(18, 18, 18)
                 .addComponent(transactionButton)
                 .addContainerGap(75, Short.MAX_VALUE))
@@ -195,6 +203,7 @@ public class LogInView extends javax.swing.JFrame {
     private javax.swing.JButton postBillBtn;
     private javax.swing.JButton registerBtn;
     private javax.swing.JLabel registerLabel;
+    private javax.swing.JButton reporteBtn;
     private javax.swing.JButton signInBtn;
     private javax.swing.JButton transactionButton;
     // End of variables declaration//GEN-END:variables
@@ -228,6 +237,10 @@ public class LogInView extends javax.swing.JFrame {
     public JButton getManageGroupBtn()
     {
         return manageGroupBtn;
+    }
+
+    public JButton getReporteBtn() {
+        return reporteBtn;
     }
     
 }

@@ -32,6 +32,8 @@ public class LogInController implements ActionListener {
             transacionAction();
         if( e.getSource().equals(currentView.getManageGroupBtn()))
             manageGroupAction();
+        if (e.getSource().equals(currentView.getReporteBtn()))
+            reportAction();
     }
     
     private void registerAction() {
@@ -64,6 +66,11 @@ public class LogInController implements ActionListener {
         currentView.setVisible(false);
         MainView.getPostingBillView().setVisible(true);
         MainView.getPostingBillView().setCurrentGroupID(new BigDecimal("22"));
+    }
+    
+    private void reportAction() {
+        currentView.setVisible(false);
+        MainView.getReporteBillView().setVisible(true);
     }
     
     private void transacionAction () {

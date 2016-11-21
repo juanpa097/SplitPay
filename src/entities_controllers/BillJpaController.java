@@ -247,14 +247,7 @@ public class BillJpaController implements Serializable {
     }
     
     public void insertBill (BigDecimal amount, String tittle, String responsable, BigDecimal idGroup) throws FileNotFoundException, SQLException, IOException {
-        
-        String thinConn = "jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDISOR";
-        String user = "is102621";
-        String passwd = "jQPXnBbKRt";
-                
-        DriverManager.registerDriver(new OracleDriver());
-        
-        Connection conn = DriverManager.getConnection(thinConn, user, passwd);
+        Connection conn = Conexion.getConnection();
         conn.setAutoCommit(true);
         PreparedStatement ps = conn.prepareStatement("INSERT INTO BILL (IMAGE, AMOUNT, TITTLE, ID_RESPONSABLE, ID_GROUP) VALUES ('null',?,?,?,?)");
         ps.setBigDecimal(1, amount);
@@ -277,5 +270,15 @@ public class BillJpaController implements Serializable {
         return lastId;
     }
     
+    public String getListGroups() {
+        EntityManager em = getEntityManager();
+        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
+        List<Object> names = getList.getResultList();
+        for (Object name : names) {
+            String nam = (String) name;
+            System.out.println(nam);
+        }
+        return "Hi";
+    }
     
 }
