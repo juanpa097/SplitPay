@@ -22,10 +22,35 @@ public class RegisterController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (checkFieldsComplete() && insertUsuario(constructUser())) {
-            registerView.setVisible(false);
-            MainView.getLogInView().setVisible(true);
-        }
+        if( e.getSource().equals( registerView.getDoneBtn() ) )
+            doneBtnAction();
+        else if( e.getSource().equals( registerView.getCancelBtn() ) )
+            cancelBtnAction();
+    }
+    
+    public void init()
+    {
+        registerView.getEmailField().setText("");
+        registerView.getMobileField().setText("");
+        registerView.getNameField().setText("");
+    }
+    
+    private void doneBtnAction()
+    {
+        if (checkFieldsComplete() && insertUsuario(constructUser()))
+            goBack();
+    }
+    
+    private void goBack()
+    {
+        registerView.setVisible(false);
+        MainView.getLogInView().getEmailField().setText("");
+        MainView.getLogInView().setVisible(true);
+    }
+    
+    private void cancelBtnAction()
+    {
+        goBack();
     }
 
     private Usuario constructUser() {

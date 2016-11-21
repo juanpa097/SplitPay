@@ -21,9 +21,24 @@ public class MainMenuController extends MouseAdapter implements ActionListener {
         currentView = currtent;
     }
 
+    private void logOutBtnAction()
+    {
+        goBack();
+    }
+    
+    private void goBack()
+    {
+        currentView.setVisible(false);
+        MainView.getLogInView().getEmailField().setText("");
+        MainView.getLogInView().setVisible(true);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        createGroupAction();
+        if( e.getSource().equals( currentView.getLogOutBtn() ) )
+            logOutBtnAction();
+        else if( e.getSource().equals( currentView.getCreateGroupBtn() ) )
+            createGroupAction();
     }
     
     @Override
@@ -72,7 +87,6 @@ public class MainMenuController extends MouseAdapter implements ActionListener {
                 return false;
             }
         };
-
         currentView.getGroupsTable().setModel(groupsModel);
         currentView.getGroupsTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }

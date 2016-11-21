@@ -36,6 +36,7 @@ public class LogInController implements ActionListener {
     
     private void registerAction() {
         currentView.setVisible(false);
+        MainView.getRegisterView().init();
         MainView.getRegisterView().setVisible(true);
     }
     

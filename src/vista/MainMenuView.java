@@ -11,6 +11,7 @@ public class MainMenuView extends javax.swing.JFrame {
         menuCtrl = new MainMenuController(this);
         groupsTable.addMouseListener(menuCtrl);
         createGroupBtn.addActionListener(menuCtrl);
+        logOutBtn.addActionListener(menuCtrl);
     }
 
     @SuppressWarnings("unchecked")
@@ -24,6 +25,7 @@ public class MainMenuView extends javax.swing.JFrame {
         groupsTable = new javax.swing.JTable();
         createGroupBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        logOutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,14 +80,12 @@ public class MainMenuView extends javax.swing.JFrame {
 
         jLabel1.setText("Nota: Para acceder a un grupo haz doble click en la fila del grupo que quieras ver.");
 
+        logOutBtn.setText("Log out");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -101,14 +101,23 @@ public class MainMenuView extends javax.swing.JFrame {
                                 .addComponent(createGroupBtn))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(147, 147, 147)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(mainTittleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(logOutBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainTittleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(groupTittleLabel)
                 .addGap(18, 18, 18)
@@ -117,7 +126,7 @@ public class MainMenuView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(9, 9, 9)
                 .addComponent(createGroupBtn)
-                .addGap(0, 39, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,6 +154,7 @@ public class MainMenuView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton logOutBtn;
     private javax.swing.JLabel mainTittleLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -152,6 +162,11 @@ public class MainMenuView extends javax.swing.JFrame {
 
     public JButton getCreateGroupBtn() {
         return createGroupBtn;
+    }
+    
+    public JButton getLogOutBtn()
+    {
+        return logOutBtn;
     }
 
     public JTable getGroupsTable() {
