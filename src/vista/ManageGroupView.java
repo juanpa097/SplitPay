@@ -56,6 +56,7 @@ public class ManageGroupView extends javax.swing.JFrame
         groupNameTextField = new javax.swing.JTextField();
         changeGroupNameBtn = new javax.swing.JButton();
         addMemberBtn = new javax.swing.JButton();
+        goBackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +107,8 @@ public class ManageGroupView extends javax.swing.JFrame
 
         addMemberBtn.setText("Add member");
 
+        goBackBtn.setText("Go back");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,7 +116,7 @@ public class ManageGroupView extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(85, 85, 85)
                         .addComponent(manageGroupTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,13 +130,16 @@ public class ManageGroupView extends javax.swing.JFrame
                                 .addComponent(groupNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(deleteGroupBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(changeGroupLeaderBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(changeGroupNameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addMemberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(goBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(deleteGroupBtn)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(changeGroupLeaderBtn)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(changeGroupNameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(addMemberBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 26, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -141,7 +147,9 @@ public class ManageGroupView extends javax.swing.JFrame
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(manageGroupTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageGroupTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goBackBtn))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(groupNameLabel)
@@ -239,11 +247,17 @@ public class ManageGroupView extends javax.swing.JFrame
         return addMemberBtn;
     }
     
+    public javax.swing.JButton getGoBackBtn()
+    {
+        return goBackBtn;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMemberBtn;
     private javax.swing.JButton changeGroupLeaderBtn;
     private javax.swing.JButton changeGroupNameBtn;
     private javax.swing.JButton deleteGroupBtn;
+    private javax.swing.JButton goBackBtn;
     private javax.swing.JLabel groupNameLabel;
     private javax.swing.JTextField groupNameTextField;
     private javax.swing.JPanel jPanel1;

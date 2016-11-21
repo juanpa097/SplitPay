@@ -50,6 +50,12 @@ public class CreateGroupController implements ActionListener
         MainView.getAddMemberView().setVisible(true);
     }
     
+    private void goBack()
+    {
+        currentView.setVisible(false);
+        MainView.getMainMenuView().setVisible(true);
+    }
+    
     private BigDecimal findLastGroup() throws SQLException
     {
         Connection con = null;
@@ -119,9 +125,8 @@ public class CreateGroupController implements ActionListener
                 Logger.getLogger(CreateGroupController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        currentView.setVisible(false);
         MainView.getMainMenuView().getMenuCtrl().loadTable(MainView.getActual_user().getEmail());
-        MainView.getMainMenuView().setVisible(true);
+        goBack();
     }
     
     @Override
@@ -133,6 +138,8 @@ public class CreateGroupController implements ActionListener
             addGroupBtnAction();
         else if( e.getSource().equals( currentView.getDeleteMemberBtn() ) )
             deleteMemberBtnAction();
+        else if( e.getSource().equals( currentView.getCancelBtn() ) )
+            goBack();
     }
     
 }

@@ -173,6 +173,13 @@ public class ManageGroupController implements ActionListener
         MainView.getManagementAddMemberView().setVisible(true);
     }
     
+    private void goBack()
+    {
+        currentView.setVisible(false);
+        MainView.getManageGroupView().init();
+        MainView.getManageGroupView().setVisible(true);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -184,6 +191,8 @@ public class ManageGroupController implements ActionListener
             changeGroupNameBtnAction();
         else if( e.getSource().equals( currentView.getAddMemberBtn() ) )
             addMemberBtnAction();
+        else if( e.getSource().equals( currentView.getGoBackBtn() ) )
+            goBack();
     }
     
 }

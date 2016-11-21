@@ -37,8 +37,12 @@ public class MainMenuController extends MouseAdapter implements ActionListener {
     
     
     
-    private void selectGroupAction(BigDecimal groupId) {
-        // Send To manage Group.
+    private void selectGroupAction(BigDecimal groupId)
+    {
+        currentView.setVisible(false);
+        MainView.getViewGroupView().setGroupID(groupId);
+        MainView.getViewGroupView().setVisible(true);
+        MainView.getViewGroupView().init();
     }
     
     private void createGroupAction() {

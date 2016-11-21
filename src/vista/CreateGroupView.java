@@ -20,6 +20,7 @@ public class CreateGroupView extends javax.swing.JFrame
         addMemberBtn.addActionListener( controlador );
         addGroupBtn.addActionListener( controlador );
         deleteMemberBtn.addActionListener( controlador );
+        cancelBtn.addActionListener( controlador );
     }
     
     public void desplegarDatos()
@@ -56,6 +57,7 @@ public class CreateGroupView extends javax.swing.JFrame
         addGroupBtn = new javax.swing.JButton();
         addMemberBtn = new javax.swing.JButton();
         deleteMemberBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,6 +117,8 @@ public class CreateGroupView extends javax.swing.JFrame
 
         deleteMemberBtn.setText("Delete member");
 
+        cancelBtn.setText("Cancel");
+
         javax.swing.GroupLayout Panel_fondoLayout = new javax.swing.GroupLayout(Panel_fondo);
         Panel_fondo.setLayout(Panel_fondoLayout);
         Panel_fondoLayout.setHorizontalGroup(
@@ -136,8 +140,10 @@ public class CreateGroupView extends javax.swing.JFrame
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(deleteMemberBtn))))
                     .addGroup(Panel_fondoLayout.createSequentialGroup()
-                        .addGap(375, 375, 375)
-                        .addComponent(addGroupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(228, 228, 228)
+                        .addComponent(addGroupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         Panel_fondoLayout.setVerticalGroup(
@@ -155,9 +161,11 @@ public class CreateGroupView extends javax.swing.JFrame
                     .addComponent(deleteMemberBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(membersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addGroupBtn)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Panel_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addGroupBtn)
+                    .addComponent(cancelBtn))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,6 +194,7 @@ public class CreateGroupView extends javax.swing.JFrame
     private javax.swing.JPanel Panel_fondo;
     private javax.swing.JButton addGroupBtn;
     private javax.swing.JButton addMemberBtn;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JButton deleteMemberBtn;
     private javax.swing.JTextField groupNameField;
     private javax.swing.JPanel membersPanel;
@@ -226,7 +235,10 @@ public class CreateGroupView extends javax.swing.JFrame
     {
         return addMemberBtn;
     }
-    
-    
+
+    public JButton getCancelBtn()
+    {
+        return cancelBtn;
+    }
     
 }
