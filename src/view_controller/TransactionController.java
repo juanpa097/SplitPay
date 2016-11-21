@@ -114,7 +114,6 @@ public class TransactionController implements ItemListener, ActionListener {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-        System.out.println("Total to Pay: " + totalToPay);
         // Descount myself
         userGrpCtrl.addUserBalance(currentUser, groupID, totalToPay.multiply(new BigDecimal("-1")));
         for (Map.Entry<String, BigDecimal> entry : listDeudas.entrySet()) {
@@ -151,7 +150,6 @@ public class TransactionController implements ItemListener, ActionListener {
         DeudaJpaController deudaCtrl = new DeudaJpaController(EntityFactorySingleton.getEMF());
         UserXGroupJpaController userGrpCtrl = new UserXGroupJpaController(EntityFactorySingleton.getEMF());
         String toPay = currentView.getDestinyComboBox().getItemAt(currentView.getDestinyComboBox().getSelectedIndex());
-        System.out.println("To Pay: " + toPay);
         List<Object[]> deptsToUser = deudaCtrl.deptsToUser(currentUser, toPay);
         if (deptsToUser.isEmpty()) {
             new JOptionPane().showMessageDialog(currentView,
@@ -175,18 +173,15 @@ public class TransactionController implements ItemListener, ActionListener {
         BigDecimal amountToTransfer = new BigDecimal(currentView.getAmountField().getText());
         userGrpCtrl.addUserBalance(currentUser, groupID, amountToTransfer.multiply(new BigDecimal(-1)));
         userGrpCtrl.addUserBalance(toPay, groupID, amountToTransfer);
-        System.err.println("HEre");
         int idx = 0;
         while (amountToTransfer.compareTo(BigDecimal.ZERO) == 1 && idx < listDeudas.size()) {
             Pair <String, BigDecimal> dept = listDeudas.get(idx++);
-            System.out.println("Deuda: " + dept.getValue() + " Acreedor: " + dept.getKey());
             if (amountToTransfer.compareTo(dept.getValue()) == 1) {
                 Double res = amountToTransfer.doubleValue() - dept.getValue().doubleValue();
                 amountToTransfer = new BigDecimal(res);
                 Pair newDebt = new Pair(dept.getKey(), BigDecimal.ZERO);
                 listDeudas.set(idx - 1, newDebt);
             } else if (amountToTransfer.compareTo(dept.getValue()) == -1) {
-                System.err.println(amountToTransfer);
                 Double res = dept.getValue().doubleValue() - amountToTransfer.doubleValue();
                 Pair newDebt = new Pair(dept.getKey(), new BigDecimal(res));
                 listDeudas.set(idx - 1, newDebt);

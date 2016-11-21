@@ -289,8 +289,7 @@ public class UserXGroupJpaController implements Serializable {
         EntityManager em = getEntityManager();
         UserXGroupPK tempPK = new UserXGroupPK(email, groupID);
         UserXGroup found = findUserXGroup(tempPK);
-        if (found == null) System.err.println("NULL");
-        else found.setBalance(found.getBalance().add(amount));
+        found.setBalance(found.getBalance().add(amount));
         try {
             edit(found);
         } catch (NonexistentEntityException ex) {
@@ -310,7 +309,6 @@ public class UserXGroupJpaController implements Serializable {
             BigDecimal grpId = (BigDecimal) group[0];
             String grpName = (String) group[1];
             BigDecimal grpBalance = (BigDecimal) group[2];
-            System.err.println("ID: " + grpId + " Name: " + grpName + " Balance: " + grpBalance);
         }
         
         return groups;
