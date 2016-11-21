@@ -59,10 +59,12 @@
                               <Component id="goBackBtn" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="manageGroupBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="postBillBtn" min="-2" pref="110" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="makeTransactionBtn" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="showBillsBtn" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -91,6 +93,7 @@
                       <Component id="manageGroupBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="postBillBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="makeTransactionBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="showBillsBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="76" max="32767" attributes="0"/>
               </Group>
@@ -184,6 +187,11 @@
         <Component class="javax.swing.JButton" name="makeTransactionBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Make Transaction"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="showBillsBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Show Bills"/>
           </Properties>
         </Component>
       </SubComponents>

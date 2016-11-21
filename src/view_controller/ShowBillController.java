@@ -13,7 +13,9 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vista.MainView;
 import vista.ShowBillView;
 
 public class ShowBillController implements ActionListener {
@@ -27,25 +29,53 @@ public class ShowBillController implements ActionListener {
         loadTable();
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JFrame f = new JFrame();
-        try {
-            f.setContentPane(new JLabel(new ImageIcon(ImageIO.read(getBillImage()))));
-        } catch (IOException ex) {
-            Logger.getLogger(ShowBillController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
-        f.pack();
-        f.setVisible(true);
-        
+    private void goBack()
+    {
+        currentView.setVisible(false);
+        MainView.getViewGroupView().setVisible(true);
     }
     
-    private void loadTable() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if( e.getSource().equals( currentView.getGoBackBtn() ) )
+            goBack();
+        else if( e.getSource().equals( currentView.getShowBtn()) && validate() )
+        {
+            JFrame f = new JFrame();
+            try {
+                f.setContentPane(new JLabel(new ImageIcon(ImageIO.read(getBillImage()))));
+            } catch (IOException ex) {
+                Logger.getLogger(ShowBillController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            f.pack();
+            f.setVisible(true);
+        }
+        
+    }
+
+    private boolean validate()
+    {
+        if( currentView.getBillsTable().getSelectedRow() == -1)
+        {
+            JOptionPane.showMessageDialog(currentView,
+            "Seleccione una bill para mostrar la imagen.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public void loadTable() {
         BillJpaController billCtrl = new BillJpaController(EntityFactorySingleton.getEMF());
         String [] columnNames = {"ID", "FECHA", "TITTLE", "ID_RESPONSABLE", "AMOUNT"};
         Object[][] data = billCtrl.getGroupBill(currentGroup);
-        DefaultTableModel billsModel = new DefaultTableModel(data, columnNames);
+        DefaultTableModel billsModel = new DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         currentView.getBillsTable().setModel(billsModel);
     }
     
@@ -62,6 +92,14 @@ public class ShowBillController implements ActionListener {
             Logger.getLogger(ShowBillController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return toRet;
+    }
+
+    public void setCurrentView(ShowBillView currentView) {
+        this.currentView = currentView;
+    }
+
+    public void setCurrentGroup(BigDecimal currentGroup) {
+        this.currentGroup = currentGroup;
     }
     
 }

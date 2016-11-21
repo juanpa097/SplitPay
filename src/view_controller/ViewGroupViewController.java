@@ -145,7 +145,7 @@ public class ViewGroupViewController implements ActionListener
         MainView.getManageGroupView().setVisible(true);
     }
     
-    private void PostBillBtnAction()
+    private void postBillBtnAction()
     {
         currentView.setVisible(false);
         MainView.getPostingBillView().getPostBillCtrl().setIdGroup(currentView.getGroupID());
@@ -160,6 +160,14 @@ public class ViewGroupViewController implements ActionListener
         MainView.getTransactionView().setVisible(true);
     }
     
+    private void showBillBtnAction()
+    {
+        currentView.setVisible(false);
+        MainView.getShowBillView().getShowBillCrtl().setCurrentGroup(currentView.getGroupID());
+        MainView.getShowBillView().getShowBillCrtl().loadTable();
+        MainView.getShowBillView().setVisible(true);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -170,7 +178,9 @@ public class ViewGroupViewController implements ActionListener
         else if( e.getSource().equals( currentView.getMakeTransactionBtn()) )
             makeTransactionBtnAction();
         else if( e.getSource().equals( currentView.getPostBillBtn()) )
-            PostBillBtnAction();
+            postBillBtnAction();
+        else if( e.getSource().equals( currentView.getShowBillsBtn()) )
+            showBillBtnAction();
     }
     
 }

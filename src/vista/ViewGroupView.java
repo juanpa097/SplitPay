@@ -17,6 +17,7 @@ public class ViewGroupView extends javax.swing.JFrame
         manageGroupBtn.addActionListener(controller);
         postBillBtn.addActionListener(controller);
         makeTransactionBtn.addActionListener(controller);
+        showBillsBtn.addActionListener(controller);
     }
     
     public void init()
@@ -43,6 +44,7 @@ public class ViewGroupView extends javax.swing.JFrame
         manageGroupBtn = new javax.swing.JButton();
         postBillBtn = new javax.swing.JButton();
         makeTransactionBtn = new javax.swing.JButton();
+        showBillsBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +75,8 @@ public class ViewGroupView extends javax.swing.JFrame
 
         makeTransactionBtn.setText("Make Transaction");
 
+        showBillsBtn.setText("Show Bills");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -91,10 +95,12 @@ public class ViewGroupView extends javax.swing.JFrame
                             .addComponent(goBackBtn)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(manageGroupBtn)
-                                .addGap(57, 57, 57)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(postBillBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(makeTransactionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(makeTransactionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(showBillsBtn)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -115,7 +121,8 @@ public class ViewGroupView extends javax.swing.JFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(manageGroupBtn)
                     .addComponent(postBillBtn)
-                    .addComponent(makeTransactionBtn))
+                    .addComponent(makeTransactionBtn)
+                    .addComponent(showBillsBtn))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
@@ -149,6 +156,7 @@ public class ViewGroupView extends javax.swing.JFrame
     private javax.swing.JScrollPane membersScrollPane;
     private javax.swing.JTable membersTable;
     private javax.swing.JButton postBillBtn;
+    private javax.swing.JButton showBillsBtn;
     // End of variables declaration//GEN-END:variables
 
     public BigDecimal getGroupID()
@@ -193,6 +201,11 @@ public class ViewGroupView extends javax.swing.JFrame
     public javax.swing.JButton getPostBillBtn()
     {
         return postBillBtn;
+    }
+    
+    public javax.swing.JButton getShowBillsBtn()
+    {
+        return showBillsBtn;
     }
     
 }
