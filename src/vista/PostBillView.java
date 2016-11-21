@@ -14,6 +14,7 @@ public class PostBillView extends javax.swing.JFrame {
         postBillCtrl.loadTable();
         confirmBtn.addActionListener(postBillCtrl);
         selectImageBtn.addActionListener(postBillCtrl);
+        goBackBtn.addActionListener(postBillCtrl);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,6 +30,7 @@ public class PostBillView extends javax.swing.JFrame {
         tittleBillLabel = new javax.swing.JLabel();
         tittleBillField = new javax.swing.JTextField();
         selectImageBtn = new javax.swing.JButton();
+        goBackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +85,8 @@ public class PostBillView extends javax.swing.JFrame {
             }
         });
 
+        goBackBtn.setText("Go back");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,15 +114,20 @@ public class PostBillView extends javax.swing.JFrame {
                         .addGap(226, 226, 226)
                         .addComponent(confirmBtn)
                         .addGap(124, 124, 124)
-                        .addComponent(selectImageBtn)))
+                        .addComponent(selectImageBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(goBackBtn)))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(goBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tittleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -132,7 +141,7 @@ public class PostBillView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmBtn)
                     .addComponent(selectImageBtn))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,6 +164,7 @@ public class PostBillView extends javax.swing.JFrame {
     private javax.swing.JTextField amountField;
     private javax.swing.JLabel amountLabel;
     private javax.swing.JButton confirmBtn;
+    private javax.swing.JButton goBackBtn;
     private javax.swing.JTable groupMembersTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -200,6 +210,9 @@ public class PostBillView extends javax.swing.JFrame {
         return selectImageBtn;
     }
     
-    
+    public JButton getGoBackBtn()
+    {
+        return goBackBtn;
+    }
 
 }

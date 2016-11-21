@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import vista.MainView;
 import vista.PostBillView;
 
 public class PostBillController implements ActionListener {
@@ -30,10 +31,23 @@ public class PostBillController implements ActionListener {
     
     public PostBillController(PostBillView view) {
         currentView = view;
-        idGroup = new BigDecimal(221);
-        currentUser = "danna@gmail.com";
     }
 
+    public void setIdGroup(BigDecimal idGroup) {
+        this.idGroup = idGroup;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    private void goBack()
+    {
+        currentView.setVisible(false);
+        MainView.getViewGroupView().setVisible(true);
+        MainView.getViewGroupView().init();
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(currentView.getConfirmBtn())) {
@@ -41,6 +55,7 @@ public class PostBillController implements ActionListener {
                 increaseUsersBalance();
                 insertBill();
                 generateOwes();
+                goBack();
             }
         }
         if (e.getSource().equals(currentView.getSelectImageBtn())) {
@@ -48,6 +63,8 @@ public class PostBillController implements ActionListener {
             jFile.showOpenDialog(null);
             imageFile = jFile.getSelectedFile();
         }
+        if( e.getSource().equals( currentView.getGoBackBtn()) )
+            goBack();
     }
     
     private void increaseUsersBalance() {

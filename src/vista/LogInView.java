@@ -24,8 +24,6 @@ public class LogInView extends javax.swing.JFrame {
         signInBtn.addActionListener(logInCtrl);
         registerBtn.addActionListener(logInCtrl);
         emailField.addActionListener(logInCtrl);
-        postBillBtn.addActionListener(logInCtrl);
-        transactionButton.addActionListener(logInCtrl);
         reporteBtn.addActionListener(logInCtrl);
     }
 
@@ -41,8 +39,6 @@ public class LogInView extends javax.swing.JFrame {
         registerLabel = new javax.swing.JLabel();
         registerBtn = new javax.swing.JButton();
         signInBtn = new javax.swing.JButton();
-        postBillBtn = new javax.swing.JButton();
-        transactionButton = new javax.swing.JButton();
         reporteBtn = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -74,20 +70,6 @@ public class LogInView extends javax.swing.JFrame {
         signInBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signInBtnActionPerformed(evt);
-            }
-        });
-
-        postBillBtn.setText("BostBill");
-        postBillBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postBillBtnActionPerformed(evt);
-            }
-        });
-
-        transactionButton.setText("Transactions");
-        transactionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transactionButtonActionPerformed(evt);
             }
         });
 
@@ -123,13 +105,7 @@ public class LogInView extends javax.swing.JFrame {
                                 .addGap(348, 348, 348))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(reporteBtn)
-                                .addGap(85, 85, 85)
-                                .addComponent(postBillBtn)
-                                .addGap(135, 135, 135))))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(transactionButton)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(285, 285, 285))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,12 +123,8 @@ public class LogInView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(registerBtn)
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(postBillBtn)
-                    .addComponent(reporteBtn))
-                .addGap(18, 18, 18)
-                .addComponent(transactionButton)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addComponent(reporteBtn)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,14 +145,6 @@ public class LogInView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_signInBtnActionPerformed
 
-    private void postBillBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postBillBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_postBillBtnActionPerformed
-
-    private void transactionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_transactionButtonActionPerformed
-
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField emailField;
@@ -188,12 +152,10 @@ public class LogInView extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logInLabel;
-    private javax.swing.JButton postBillBtn;
     private javax.swing.JButton registerBtn;
     private javax.swing.JLabel registerLabel;
     private javax.swing.JButton reporteBtn;
     private javax.swing.JButton signInBtn;
-    private javax.swing.JButton transactionButton;
     // End of variables declaration//GEN-END:variables
 
     private LogInController logInCtrl;
@@ -214,14 +176,6 @@ public class LogInView extends javax.swing.JFrame {
         return registerBtn;
     }    
 
-    public JButton getPostBillBtn() {
-        return postBillBtn;
-    }
-
-    public JButton getTransactionButton() {
-        return transactionButton;
-    }
-    
     public JButton getReporteBtn() {
         return reporteBtn;
     }

@@ -15,6 +15,8 @@ public class ViewGroupView extends javax.swing.JFrame
         controller = new ViewGroupViewController(this);
         goBackBtn.addActionListener(controller);
         manageGroupBtn.addActionListener(controller);
+        postBillBtn.addActionListener(controller);
+        makeTransactionBtn.addActionListener(controller);
     }
     
     public void init()
@@ -39,6 +41,8 @@ public class ViewGroupView extends javax.swing.JFrame
         groupNameTextField = new javax.swing.JTextField();
         goBackBtn = new javax.swing.JButton();
         manageGroupBtn = new javax.swing.JButton();
+        postBillBtn = new javax.swing.JButton();
+        makeTransactionBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +69,10 @@ public class ViewGroupView extends javax.swing.JFrame
 
         manageGroupBtn.setText("Manage group");
 
+        postBillBtn.setText("Post Bill");
+
+        makeTransactionBtn.setText("Make Transaction");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -81,7 +89,12 @@ public class ViewGroupView extends javax.swing.JFrame
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(goBackBtn)
-                            .addComponent(manageGroupBtn))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(manageGroupBtn)
+                                .addGap(57, 57, 57)
+                                .addComponent(postBillBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(makeTransactionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -99,7 +112,10 @@ public class ViewGroupView extends javax.swing.JFrame
                 .addGap(16, 16, 16)
                 .addComponent(membersScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(manageGroupBtn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manageGroupBtn)
+                    .addComponent(postBillBtn)
+                    .addComponent(makeTransactionBtn))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
@@ -128,9 +144,11 @@ public class ViewGroupView extends javax.swing.JFrame
     private javax.swing.JLabel groupNameLabel;
     private javax.swing.JTextField groupNameTextField;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton makeTransactionBtn;
     private javax.swing.JButton manageGroupBtn;
     private javax.swing.JScrollPane membersScrollPane;
     private javax.swing.JTable membersTable;
+    private javax.swing.JButton postBillBtn;
     // End of variables declaration//GEN-END:variables
 
     public BigDecimal getGroupID()
@@ -165,6 +183,16 @@ public class ViewGroupView extends javax.swing.JFrame
     public javax.swing.JButton getManageGroupBtn()
     {
         return manageGroupBtn;
+    }
+    
+    public javax.swing.JButton getMakeTransactionBtn()
+    {
+        return makeTransactionBtn;
+    }
+    
+    public javax.swing.JButton getPostBillBtn()
+    {
+        return postBillBtn;
     }
     
 }

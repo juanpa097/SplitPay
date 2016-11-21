@@ -4,8 +4,6 @@ import entities.Usuario;
 import entities_controllers.UsuarioJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import vista.LogInView;
 import vista.MainView;
@@ -26,10 +24,6 @@ public class LogInController implements ActionListener {
         if (e.getSource().equals(currentView.getRegisterBtn()))
             registerAction();
         // TEST
-        if (e.getSource().equals(currentView.getPostBillBtn()))
-            postBillAction();
-        if (e.getSource().equals(currentView.getTransactionButton()))
-            transacionAction();
         if (e.getSource().equals(currentView.getReporteBtn()))
             reportAction();
     }
@@ -60,22 +54,9 @@ public class LogInController implements ActionListener {
                     JOptionPane.ERROR_MESSAGE);
     }
     
-    // Temporal function for testing the posting a bill view
-    private void postBillAction () {
-        currentView.setVisible(false);
-        MainView.getPostingBillView().setVisible(true);
-    }
-    
     private void reportAction() {
         currentView.setVisible(false);
         MainView.getReporteBillView().setVisible(true);
         MainView.getReporteBillView().getReportCtrl().loadTable();
     }
-    
-    private void transacionAction () {
-        currentView.setVisible(false);
-        MainView.getTransactionView().setVisible(true);
-        
-    }
-    
 }

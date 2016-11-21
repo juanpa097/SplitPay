@@ -57,7 +57,13 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="goBackBtn" min="-2" max="-2" attributes="0"/>
-                              <Component id="manageGroupBtn" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="manageGroupBtn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="postBillBtn" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                  <Component id="makeTransactionBtn" min="-2" pref="149" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -81,7 +87,11 @@
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Component id="membersScrollPane" min="-2" pref="276" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="manageGroupBtn" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="manageGroupBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="postBillBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="makeTransactionBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="76" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -164,6 +174,16 @@
         <Component class="javax.swing.JButton" name="manageGroupBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage group"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="postBillBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Post Bill"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="makeTransactionBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Make Transaction"/>
           </Properties>
         </Component>
       </SubComponents>
