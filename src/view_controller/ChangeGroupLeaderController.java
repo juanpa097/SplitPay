@@ -30,7 +30,6 @@ public class ChangeGroupLeaderController implements ActionListener
     
     public void init()
     {
-        System.out.println("ola");
         DefaultComboBoxModel < String > modelo = new DefaultComboBoxModel();
         List < Usuario > usuarios = MainView.getManageGroupView().getGroup_list_user();
         for( int i = 0 ; i < usuarios.size() ; ++i )

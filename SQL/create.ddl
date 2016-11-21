@@ -8,7 +8,7 @@
 
 CREATE TABLE BILL
   (
-    IMAGE CLOB,
+    IMAGE BLOB,
     AMOUNT         NUMBER NOT NULL ,
     TITTLE         VARCHAR2 (100) NOT NULL ,
     ID             NUMBER NOT NULL ,

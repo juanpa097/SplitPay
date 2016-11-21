@@ -21,10 +21,7 @@ import entities_controllers.exceptions.PreexistingEntityException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.util.Pair;
@@ -343,7 +340,6 @@ public class DeudaJpaController implements Serializable {
             String deud = (String) objects[0];
             String acreed = (String) objects[1];
             BigDecimal amount = (BigDecimal) objects[2];
-            System.out.println("Deudor: " + deud + " Acreed: " + acreed);
         }
         return resultList;
     }

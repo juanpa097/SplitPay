@@ -324,16 +324,13 @@ public class BillJpaController implements Serializable {
             String date = (String) temp[0];
             model[i][0] = date;
 
-            System.out.println("Date: " + date + " ");
             for (int j = 1; j < temp.length; ++j) {
                 if (temp[j] == null) {
                     model[i][j] = BigDecimal.ZERO;
                 } else {
                     model[i][j] = (BigDecimal) temp[j];
                 }
-                System.out.print("Val: " + (BigDecimal) model[i][j]);
             }
-            System.out.println("");
         }
 
         for (int j = 0; j < model.length - 1; ++j) {
@@ -344,7 +341,6 @@ public class BillJpaController implements Serializable {
                 total += current.intValue();
             }
             model[j][objects.length - 1] = new BigDecimal(total);
-            System.out.println("SUM: " + (BigDecimal) model[j][objects.length - 1]);
         }
         model[model.length - 1][0] = "TOTAL";
 
