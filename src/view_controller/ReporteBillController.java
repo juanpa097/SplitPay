@@ -4,6 +4,7 @@ import entities_controllers.BillJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
+import vista.MainView;
 import vista.ReporteBillView;
 
 public class ReporteBillController implements ActionListener {
@@ -14,9 +15,16 @@ public class ReporteBillController implements ActionListener {
         currentView = vista;
     }
 
+    private void goBack()
+    {
+        currentView.setVisible(false);
+        MainView.getLogInView().setVisible(true);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        loadTable();
+        if( e.getSource().equals( currentView.getGoBackBtn() ) )
+            goBack();
     }
     
     public void loadTable() {

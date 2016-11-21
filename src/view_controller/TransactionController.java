@@ -17,6 +17,7 @@ import java.util.Map;
 import javafx.util.Pair;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import vista.MainView;
 import vista.TransactionView;
 
 public class TransactionController implements ItemListener, ActionListener {
@@ -27,12 +28,14 @@ public class TransactionController implements ItemListener, ActionListener {
 
     public TransactionController(TransactionView current) {
         currentView = current;
-        currentUser = "julio@gmail.com";
-        groupID = new BigDecimal("22");
+    }
+
+    public void init()
+    {
         DefaultComboBoxModel comboModel = new DefaultComboBoxModel(listEmailsGroup());
         currentView.getDestinyComboBox().setModel(comboModel);
     }
-
+    
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource().equals(currentView.getClearBebtCheckBox())) {
@@ -53,12 +56,31 @@ public class TransactionController implements ItemListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (currentView.getClearBebtCheckBox().isSelected()) {
-            //payListUsers();
+        if( e.getSource().equals(currentView.getGoBackBtn()) )
+            goBack();
+        else if (currentView.getClearBebtCheckBox().isSelected()) {
+            payListUsers();
+            goBack();
         }
-        if (currentView.getSinglePayCheckBox().isSelected()) {
+        else if (currentView.getSinglePayCheckBox().isSelected()) {
             seeDebts();
+            goBack();
         }
+    }
+    
+    private void goBack()
+    {
+        currentView.setVisible(false);
+        MainView.getViewGroupView().init();
+        MainView.getViewGroupView().setVisible(true);
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public void setGroupID(BigDecimal groupID) {
+        this.groupID = groupID;
     }
 
     private void onSelectedClearDebtAction() {

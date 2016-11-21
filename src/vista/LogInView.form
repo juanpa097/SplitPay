@@ -80,16 +80,11 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="registerBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="reporteBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="registerBtn" max="32767" attributes="0"/>
+                              <Component id="reporteBtn" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -111,9 +106,9 @@
                   <Component id="registerLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="registerBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="reporteBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="116" max="32767" attributes="0"/>
+                  <EmptySpace pref="130" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -159,7 +154,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="reporteBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ver Reporte"/>
+            <Property name="text" type="java.lang.String" value="Ver Reporte de Bills"/>
           </Properties>
         </Component>
       </SubComponents>

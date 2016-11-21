@@ -14,6 +14,11 @@ public class TransactionView extends javax.swing.JFrame {
         clearBebtCheckBox.addItemListener(transactionCrtl);
         singlePayCheckBox.addItemListener(transactionCrtl);
         doneButton.addActionListener(transactionCrtl);
+        goBackBtn.addActionListener(transactionCrtl);
+    }
+
+    public TransactionController getTransactionCrtl() {
+        return transactionCrtl;
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +33,7 @@ public class TransactionView extends javax.swing.JFrame {
         clearBebtCheckBox = new javax.swing.JCheckBox();
         amountField = new javax.swing.JTextField();
         doneButton = new javax.swing.JButton();
+        goBackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,15 +74,14 @@ public class TransactionView extends javax.swing.JFrame {
             }
         });
 
+        goBackBtn.setText("Go Back");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(tittleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -93,16 +98,24 @@ public class TransactionView extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(singlePayCheckBox)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 230, Short.MAX_VALUE)))
+                                            .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(goBackBtn)))
+                        .addGap(0, 230, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tittleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(goBackBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tittleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(destinyLabel)
                     .addComponent(destinyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,6 +167,7 @@ public class TransactionView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> destinyComboBox;
     private javax.swing.JLabel destinyLabel;
     private javax.swing.JButton doneButton;
+    private javax.swing.JButton goBackBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JCheckBox singlePayCheckBox;
     private javax.swing.JLabel tittleLabel;
@@ -179,6 +193,10 @@ public class TransactionView extends javax.swing.JFrame {
 
     public JCheckBox getSinglePayCheckBox() {
         return singlePayCheckBox;
+    }
+
+    public JButton getGoBackBtn() {
+        return goBackBtn;
     }
     
     

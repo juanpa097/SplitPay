@@ -4,7 +4,6 @@ import entities.Grupo;
 import entities_controllers.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -157,6 +156,9 @@ public class ViewGroupViewController implements ActionListener
     private void makeTransactionBtnAction()
     {
         currentView.setVisible(false);
+        MainView.getTransactionView().getTransactionCrtl().setCurrentUser(MainView.getActual_user().getEmail());
+        MainView.getTransactionView().getTransactionCrtl().setGroupID(currentView.getGroupID());
+        MainView.getTransactionView().getTransactionCrtl().init();
         MainView.getTransactionView().setVisible(true);
     }
     

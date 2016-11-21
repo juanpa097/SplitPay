@@ -40,7 +40,6 @@ public class LogInController implements ActionListener {
         Usuario found = contro.findUsuario( email );
         if( found != null )
         {
-            System.err.println("Existe");
             currentView.setVisible(false);
             //MainView.getCreateGroupView().setVisible(true);// Usado para testear la view de createGroupView
             MainView.setActualUser( found );
@@ -56,7 +55,7 @@ public class LogInController implements ActionListener {
     
     private void reportAction() {
         currentView.setVisible(false);
-        MainView.getReporteBillView().setVisible(true);
         MainView.getReporteBillView().getReportCtrl().loadTable();
+        MainView.getReporteBillView().setVisible(true);
     }
 }
