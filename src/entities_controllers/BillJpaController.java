@@ -274,7 +274,7 @@ public class BillJpaController implements Serializable {
 
     public String getListGroups() {
         EntityManager em = getEntityManager();
-        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
+        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL RIGHT OUTER JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
         List<Object> names = getList.getResultList();
         String list = "";
         for (int i = 0; i < names.size(); ++i) {
@@ -293,7 +293,7 @@ public class BillJpaController implements Serializable {
 
     public String[] getArrayGroupNames() {
         EntityManager em = getEntityManager();
-        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
+        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL RIGHT OUTER JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
         List<Object> names = getList.getResultList();
         String[] grpNames = new String[names.size() + 2];
         grpNames[0] = "Fecha";
@@ -306,7 +306,7 @@ public class BillJpaController implements Serializable {
 
     public int getCountGroups() {
         EntityManager em = getEntityManager();
-        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
+        Query getList = em.createNativeQuery("SELECT distinct (GRUPO.NAME) FROM BILL RIGHT OUTER JOIN GRUPO ON BILL.ID_GROUP = GRUPO.ID");
         List<Object> names = getList.getResultList();
         int cont = names.size();
         return cont;
