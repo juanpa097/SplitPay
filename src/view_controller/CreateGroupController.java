@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import vista.CreateGroupView;
 import vista.MainView;
 
@@ -54,6 +55,9 @@ public class CreateGroupController implements ActionListener
     {
         currentView.setVisible(false);
         MainView.getMainMenuView().setVisible(true);
+        DefaultTableModel mod = (DefaultTableModel) currentView.getMembersTable().getModel();
+        mod.setRowCount(0);
+        currentView.getGroupNameField().setText("");
     }
     
     private BigDecimal findLastGroup() throws SQLException
@@ -127,6 +131,7 @@ public class CreateGroupController implements ActionListener
                 Logger.getLogger(CreateGroupController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        goBack();
     }
     
     @Override

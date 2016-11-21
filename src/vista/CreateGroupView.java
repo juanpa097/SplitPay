@@ -4,6 +4,7 @@ import entities.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import view_controller.CreateGroupController;
 
@@ -36,6 +37,10 @@ public class CreateGroupView extends javax.swing.JFrame
         DefaultTableModel model = new DefaultTableModel( data , columnas );
         membersTable.setModel( model );
         membersScrollPane.setViewportView( membersTable );
+    }
+    
+    public void resetTable () {
+        membersTable = new JTable();
     }
 
     /**
