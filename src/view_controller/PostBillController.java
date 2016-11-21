@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import vista.PostBillView;
 
@@ -29,8 +30,8 @@ public class PostBillController implements ActionListener {
     
     public PostBillController(PostBillView view) {
         currentView = view;
-        idGroup = new BigDecimal(22);
-        currentUser = "juanpenaloza@gmail.com";
+        idGroup = new BigDecimal(221);
+        currentUser = "danna@gmail.com";
     }
 
     @Override
@@ -58,7 +59,7 @@ public class PostBillController implements ActionListener {
         Math.round(amount);
         BigDecimal toAdd = new BigDecimal(amount);
         try {
-            usrXgrpCntrl.encreaseUsersBalance(payersEmails(), currentView.getCurrentGroupID(), toAdd);
+            usrXgrpCntrl.encreaseUsersBalance(payersEmails(), idGroup, toAdd);
         } catch (Exception ex) {
             new JOptionPane().showMessageDialog(currentView,
                     "El usuario no existe.",
@@ -93,6 +94,13 @@ public class PostBillController implements ActionListener {
         if (countPayers() == 0.0) {
             new JOptionPane().showMessageDialog(currentView,
                     "Seleccione usuarios para pagar..",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (imageFile == null) {
+            new JOptionPane().showMessageDialog(currentView,
+                    "Seleccione una imagen.",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             return false;
@@ -134,8 +142,10 @@ public class PostBillController implements ActionListener {
 
     public void loadTable() {
         GrupoJpaController groupJpaCtrl = new GrupoJpaController(EntityFactorySingleton.getEMF());
-        Object[][] usersInGroup = groupJpaCtrl.getGroupMembers(currentView.getCurrentGroupID());
-
+        Object[][] usersInGroup = groupJpaCtrl.getGroupMembers(idGroup);
+        String [] labels = {"Is Paying?" , "Name", "Email"};
+        //DefaultTableModel newModel = new DefaultTableModel(usersInGroup, labels);
+        //currentView.getGroupMembersTable().setModel(newModel);
         DefaultTableModel groupMembersModel = (DefaultTableModel) currentView.getGroupMembersTable().getModel();
         for (int i = 0; i < usersInGroup.length; ++i) {
             Object[] row = {false, usersInGroup[i][0], usersInGroup[i][1]};
@@ -169,7 +179,7 @@ public class PostBillController implements ActionListener {
         BigDecimal groupID = idGroup;
 
         try {
-            billCtrl.insertBill( amoun, tittle, responsable, groupID);
+            billCtrl.insertBill( amoun, tittle, responsable, groupID, imageFile);
         } catch (SQLException ex) {
             Logger.getLogger(PostBillController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

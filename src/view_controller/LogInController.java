@@ -65,7 +65,6 @@ public class LogInController implements ActionListener {
     private void postBillAction () {
         currentView.setVisible(false);
         MainView.getPostingBillView().setVisible(true);
-        MainView.getPostingBillView().setCurrentGroupID(new BigDecimal("22"));
     }
     
     private void reportAction() {

@@ -247,14 +247,19 @@ public class BillJpaController implements Serializable {
         }
     }
     
-    public void insertBill (BigDecimal amount, String tittle, String responsable, BigDecimal idGroup) throws FileNotFoundException, SQLException, IOException {
+    public void insertBill (BigDecimal amount, String tittle, String responsable, BigDecimal idGroup, File image) throws FileNotFoundException, SQLException, IOException {
         Connection conn = Conexion.getConnection();
         conn.setAutoCommit(true);
-        PreparedStatement ps = conn.prepareStatement("INSERT INTO BILL (IMAGE, AMOUNT, TITTLE, ID_RESPONSABLE, ID_GROUP) VALUES ('null',?,?,?,?)");
+        
+        FileInputStream input = new FileInputStream(image);
+        
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO BILL (AMOUNT, TITTLE, ID_RESPONSABLE, ID_GROUP, IMAGE) VALUES (?,?,?,?,?)");
+        
         ps.setBigDecimal(1, amount);
         ps.setString(2, tittle);
         ps.setString(3, responsable);
         ps.setBigDecimal(4, idGroup);
+        ps.setBinaryStream(5, input);
         
         ps.executeUpdate();
         ps.close();
